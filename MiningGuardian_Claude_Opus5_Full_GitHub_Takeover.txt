@@ -1,0 +1,1041 @@
+MININGGUARDIAN — CLAUDE OPUS 5 FULL GITHUB TAKEOVER
+
+PRIVATE GITHUB REPOSITORY:
+https://github.com/ninjasharingan1-ai/MiningGuardian-Claude-Handoff
+
+Default branch:
+main
+
+Current GitHub handoff repository HEAD:
+eca9c7455e253e588b5b9278dbc30ac7a0bdb38e
+
+Accepted MiningGuardian continuation checkpoint inside the handoff:
+97b9837068f553085cc066a4134d165cb1a9c40c
+
+======================================================================
+EXECUTION HEADER
+======================================================================
+
+Recommended Model: Claude Opus 5
+Initial Mode: PLAN / READ-ONLY FORENSIC TAKEOVER
+Reasoning Effort: MAXIMUM / DEEP
+Mode switching allowed: NO during forensic takeover.
+Implementation may begin only after the explicit takeover verdict described below.
+
+======================================================================
+1. REPOSITORY
+======================================================================
+
+You are taking over the MiningGuardian engineering project from this PRIVATE GitHub repository:
+
+https://github.com/ninjasharingan1-ai/MiningGuardian-Claude-Handoff
+
+Repository:
+ninjasharingan1-ai/MiningGuardian-Claude-Handoff
+
+Default branch:
+main
+
+Current GitHub handoff repository HEAD:
+eca9c7455e253e588b5b9278dbc30ac7a0bdb38e
+
+IMPORTANT:
+
+This GitHub HEAD represents the creation of the forensic handoff repository.
+
+It is NOT the original MiningGuardian engineering checkpoint.
+
+The accepted MiningGuardian continuation checkpoint contained inside the handoff is:
+
+97b9837068f553085cc066a4134d165cb1a9c40c
+
+Do not confuse these identities.
+
+======================================================================
+2. FIRST FILE TO READ
+======================================================================
+
+Read first:
+
+CLAUDE_REPOSITORY_ENTRYPOINT.md
+
+Then follow the required reading order defined there.
+
+Do NOT immediately modify code.
+
+======================================================================
+3. CANONICAL PROJECT OBJECTIVE
+======================================================================
+
+MiningGuardian has one primary optimization North Star:
+
+MAXIMIZE REALIZED MINING REWARD PER REAL-TIME EVALUATION BLOCK
+
+subject to:
+
+- hard GPU safety constraints;
+- mining continuity;
+- operational stability;
+- evidence sufficiency;
+- hardware/capability constraints;
+- bounded and reversible execution authority.
+
+This objective must remain explicit throughout future architecture.
+
+MiningGuardian is NOT fundamentally optimizing:
+
+- maximum reported hashrate;
+- maximum GPU clocks;
+- minimum temperature;
+- minimum power;
+- maximum TH/W;
+- share count;
+- predicted reward alone.
+
+Those are state variables, evidence, constraints, features, diagnostics, or intermediate optimization signals.
+
+The final optimization criterion is sustainable realized mining reward over actual elapsed real time.
+
+Conceptually:
+
+RealizedRewardRate = RealizedReward / ActualElapsedEvaluationTime
+
+Exact accounting semantics must eventually be governed by an accepted versioned RewardContract.
+
+A theoretically faster configuration is not necessarily superior if restart, warm-up, reconnect, stale shares, instability, or other transition costs reduce realized reward within the real-time evaluation block.
+
+NO_ACTION must always remain a valid alternative.
+
+Hard safety dominates reward optimization.
+
+======================================================================
+4. THIS IS NOT A GREENFIELD PROJECT
+======================================================================
+
+Do NOT redesign MiningGuardian from scratch.
+
+Do NOT infer architecture merely from the newest files.
+
+Do NOT assume the active worktree contains the complete historical project.
+
+The repository intentionally contains several distinct surfaces:
+
+01_FULL_HISTORICAL_PROJECT/
+02_ACTIVE_CURRENT_WORKTREE/
+03_ACCEPTED_BASELINES/
+04_FORENSICS/
+05_INSTRUCTIONS/
+
+These have different roles.
+
+They MUST NOT be automatically merged.
+
+======================================================================
+5. SURFACE MEANING
+======================================================================
+
+01_FULL_HISTORICAL_PROJECT
+
+Use for reconstruction of historical implementation and project evolution.
+
+It includes older runtime, mining, evidence, decision, persistence, observability, and state implementation.
+
+It is historical evidence.
+
+It is NOT automatically the active continuation source.
+
+02_ACTIVE_CURRENT_WORKTREE
+
+This contains the accepted current implementation surface.
+
+The original worktree identity represented here was:
+
+Branch:
+
+s4a/partial-rewrite-01
+
+Accepted MiningGuardian checkpoint:
+
+97b9837068f553085cc066a4134d165cb1a9c40c
+
+Future implementation is expected to continue semantically from this surface only after takeover verification.
+
+03_ACCEPTED_BASELINES
+
+Contains extracted accepted baselines and authority material, including M2 and M3.1.
+
+Use these to establish what was formally accepted, not merely what happened to exist historically.
+
+04_FORENSICS
+
+Contains Git/history reports, inventories, current checkpoint evidence, and provenance generated before GitHub transfer.
+
+05_INSTRUCTIONS
+
+Contains handoff/package instructions.
+
+======================================================================
+6. MANDATORY PHASE ZERO
+======================================================================
+
+Begin with:
+
+MININGGUARDIAN FULL PROJECT FORENSIC TAKEOVER — READ ONLY
+
+Your sequence is:
+
+DISCOVER
+→ INVENTORY
+→ VERIFY
+→ RECONSTRUCT HISTORY
+→ MAP RESPONSIBILITIES
+→ MAP SUPERSESSION
+→ VERIFY ACCEPTED CHECKPOINT
+→ DETERMINE ACTIVE WORKTREE COMPLETENESS
+→ ONLY THEN CONSIDER IMPLEMENTATION
+
+No source modification during this phase.
+
+======================================================================
+7. RECONSTRUCT M0 / M1 / M2 / M3
+======================================================================
+
+M0, M1, M2 and M3 are project phases.
+
+Do not expect literal directories named M0/M1/M2.
+
+Use:
+
+- source code;
+- tests;
+- Git forensic reports;
+- acceptance documents;
+- baseline documents;
+- ADRs;
+- freeze manifests;
+- implementation reports;
+- historical artifacts.
+
+If an exact historical phase boundary cannot be proven, report:
+
+HISTORICAL_PHASE_ATTRIBUTION_UNRESOLVED
+
+Do not invent historical certainty.
+
+======================================================================
+8. SOURCE-OF-TRUTH PRIORITY
+======================================================================
+
+Use the accepted repository hierarchy.
+
+At minimum reconstruct authority from:
+
+1. frozen accepted M2 implementation;
+2. M2_FINAL_ACCEPTANCE.md;
+3. M2_FINAL_BASELINE.md;
+4. M3_ENGINEERING_HANDOFF.md;
+5. current compatible accepted ADR/spec contracts;
+6. accepted M3.0 / M3.1 / M3.2 authority and freeze artifacts;
+7. current accepted implementation checkpoints;
+8. historical ADR drafts only as context.
+
+A historical draft does not supersede an accepted contract.
+
+======================================================================
+9. RECONSTRUCT ACCEPTED M2
+======================================================================
+
+Understand the accepted M2 implementation before touching future AI architecture.
+
+Map at minimum:
+
+- Evidence Foundation;
+- Claim semantics;
+- Hypothesis semantics;
+- Candidate generation;
+- prediction interfaces already present in M2;
+- Policy;
+- DecisionScorer;
+- DecisionRanker;
+- Decision Engine;
+- DecisionResult;
+- persistence;
+- simulation/shadow boundaries;
+- relevant CLI/runtime integration.
+
+Preserve these distinctions:
+
+Observation
+!= Evidence
+!= Claim
+!= Hypothesis
+!= Candidate
+
+Prediction
+!= Outcome
+
+Decision
+!= Action
+!= Execution
+!= Outcome
+!= Reward
+
+Frozen responsibility remains:
+
+M2 Policy
+    = admissibility
+
+M2 DecisionScorer
+    = Decision Utility Score
+
+M2 DecisionRanker
+    = ranking
+
+M2 Decision Engine
+    = selection/orchestration
+
+Conceptual accepted DUS:
+
+(Benefit × Confidence) - (Risk + ActionCost + Uncertainty)
+
+Do not silently transfer this authority to an LLM, ML model, PredictionCoordinator, Reward controller, or Safe Control.
+
+======================================================================
+10. RECONSTRUCT M3.1
+======================================================================
+
+Reconstruct frozen Runtime Observability.
+
+Understand at minimum:
+
+- RuntimeObservation;
+- GPU/NVML telemetry;
+- miner telemetry;
+- pool telemetry;
+- source time where authoritative;
+- receipt/ingestion time;
+- processing time;
+- freshness;
+- quality;
+- continuity;
+- observer behavior;
+- runtime persistence.
+
+Raw M3.1 observations remain raw runtime facts.
+
+Derived layers may interpret them but must not rewrite them.
+
+======================================================================
+11. RECONSTRUCT M3.2
+======================================================================
+
+Already accepted/frozen:
+
+S1 — Core Semantic Contracts
+S2 — Bounded Evidence Query
+S3 — Temporal Admission / Identity / Continuity / Conflict
+
+Current major phase:
+
+S4 — Deterministic Estimation Core
+
+Current implemented sub-program:
+
+S4A — deterministic methods
+
+Completed:
+
+R1
+Method/config/result foundations.
+
+R2
+Authoritative S3 support binding.
+
+R3
+Implemented:
+
+- latest_eligible_value
+- arithmetic_mean
+- median
+- min
+- max
+
+R4
+Implemented:
+
+- within_segment_delta
+- source_time_counter_rate
+- historical_endpoint_slope
+
+R3 and R4 are CLOSED.
+
+Do not casually reopen them.
+
+======================================================================
+12. CURRENT ACCEPTED R4 CHECKPOINT
+======================================================================
+
+Verify from repository evidence:
+
+MiningGuardian checkpoint:
+
+97b9837068f553085cc066a4134d165cb1a9c40c
+
+Expected methods.py SHA-256:
+
+A2CB0F3DC4B969357EA82087B44C3E63D1906340039FAD4358A29D18169D42B0
+
+Expected test_state_methods.py SHA-256:
+
+9A9E391E664062517CBA64E2424D2DCB4979CC5C37510A2AE1302324FEE06A72
+
+Expected missing-opportunity authority SHA-256:
+
+3006B4D45AA87F1422115E86FBD9C528682BCD765FA2AA6F443ADBA603C3935B
+
+Expected R4 authority SHA-256:
+
+9BF93294FC69BC98DA4783D9EE6E3B96A350DA17EDB928E87EAE3F27D9E07282
+
+Reference R4 closure:
+
+- R4-specific pytest: 30 passed;
+- full pytest: 1110 passed;
+- 2 known warnings;
+- focused Ruff: PASS;
+- Mypy: PASS;
+- compile: PASS;
+- Golden preserved;
+- worktree clean.
+
+If repository evidence contradicts these identities, stop and report the exact mismatch.
+
+======================================================================
+13. REQUIRED FORENSIC REPORT
+======================================================================
+
+Before implementation, produce:
+
+A. Repository map
+
+B. Handoff integrity assessment
+
+C. M0/M1 historical lineage
+
+D. Accepted M2 executable architecture
+
+E. Frozen M2 ownership boundaries
+
+F. M3.0 architecture lineage
+
+G. M3.1 executable architecture
+
+H. M3.2 S1-S3 architecture
+
+I. S4A R1-R4 implementation map
+
+J. Historical/current supersession table
+
+Use only:
+
+- PRESERVED
+- M3.1-SUPERSEDED
+- M3.2-SUPERSEDED
+- INTENTIONALLY_REMOVED
+- NOT_PRESENT_IN_ACTIVE_WORKTREE
+- CURRENTLY_MODIFIED
+- HISTORICAL_ONLY
+- UNRESOLVED
+
+K. Active worktree completeness
+
+Choose exactly:
+
+- FULL
+- FOCUSED/PARTIAL
+- UNRESOLVED
+
+L. R4 identity verification
+
+M. R5 authorization/readiness verdict
+
+Do not infer completeness from directory size.
+
+======================================================================
+14. TAKEOVER VERDICT
+======================================================================
+
+At the end of Phase Zero output exactly one:
+
+TAKEOVER_VERIFIED_CONTINUE_R5
+
+or:
+
+TAKEOVER_BLOCKED
+
+If blocked, state the exact artifact, contract, hash, dependency, or semantic conflict responsible.
+
+Do not repair anything during forensic takeover.
+
+======================================================================
+15. CURRENT NEXT PHASE — S4A-R5
+======================================================================
+
+Only after:
+
+TAKEOVER_VERIFIED_CONTINUE_R5
+
+switch to implementation planning.
+
+Target:
+
+M3.2 S4A-R5 — Missing-fraction fail-closed boundary
+
+This does NOT authorize numeric missing-fraction arithmetic.
+
+Accepted identity:
+
+missing_fraction
+
+Accepted no-result:
+
+MISSING_OPPORTUNITY_AUTHORITY
+
+Accepted evidence exclusion reason:
+
+method:missing_opportunity_authority
+
+Current S1-S3 authority does NOT establish:
+
+- explicit expected opportunity identities;
+- authoritative opportunity set;
+- one-to-one observation/opportunity fulfillment;
+- duplicate opportunity semantics;
+- authoritative opportunity window/scope identity.
+
+Therefore never infer a missing-opportunity denominator from:
+
+- row count;
+- integer count;
+- timestamps;
+- cadence;
+- regular acquisition;
+- absence;
+- inferred schedule;
+- caller-provided denominator.
+
+Do not synthesize opportunity identities.
+
+Do not add an opportunity contract in R5.
+
+======================================================================
+16. EXISTING R5 SUPPORT BEHAVIOR
+======================================================================
+
+Verify from actual source that bind_method_support already recognizes:
+
+MethodName.MISSING_FRACTION
+
+and produces:
+
+MISSING_OPPORTUNITY_AUTHORITY
+
+with considered observations represented exactly once as:
+
+role = EXCLUDED
+reason = method:missing_opportunity_authority
+
+Do not duplicate this authority in another support layer.
+
+The remaining R5 gap is expected to be narrow dispatch/execution closure plus tests.
+
+Prove this rather than assuming it.
+
+======================================================================
+17. PREVIOUS PREFLIGHT ERROR
+======================================================================
+
+A previous read-only R5 preflight incorrectly attempted:
+
+supported_method_versions(
+    MethodName.MISSING_FRACTION
+)
+
+Actual API:
+
+supported_method_versions()
+
+returns the mapping.
+
+Correct access:
+
+supported_method_versions()[
+    MethodName.MISSING_FRACTION
+]
+
+The prior failure was a preflight-script defect, not a production defect.
+
+======================================================================
+18. R5 REQUIRED PROPERTIES
+======================================================================
+
+Prove:
+
+- missing_fraction recognized;
+- valid input returns MISSING_OPPORTUNITY_AUTHORITY;
+- considered evidence EXCLUDED exactly once;
+- no evidence USED;
+- empty population gives empty evidence_use;
+- row count cannot produce numeric result;
+- regular cadence cannot produce numeric result;
+- irregular cadence cannot produce numeric result;
+- absence cannot create opportunity authority;
+- caller integer cannot create authority;
+- permutation preserves result;
+- malformed authority remains typed error;
+- no opportunity contract introduced;
+- no numeric result emitted;
+- R3 unchanged;
+- R4 unchanged;
+- public execution surface not silently widened.
+
+======================================================================
+19. R6 AFTER R5
+======================================================================
+
+S4A-R6 is adversarial closure.
+
+Verify:
+
+- cross-method determinism;
+- replay/permutation invariance;
+- resource bounds;
+- malformed artifact handling;
+- duplicate identity;
+- no database side effects;
+- no network access;
+- no hardware access;
+- no randomness;
+- no hidden wall clock;
+- no provider ranking;
+- no hidden unit conversion;
+- no assessment leakage;
+- no snapshot leakage;
+- no persistence leakage;
+- no public-surface widening.
+
+Then close S4A.
+
+======================================================================
+20. REMAINING M3.2
+======================================================================
+
+After S4A:
+
+S4 remaining deterministic state layers
+
+Conceptual responsibilities include:
+
+- assessment;
+- provenance;
+- assembly;
+- production envelope.
+
+S5
+
+Initial GPU/miner EstimatedState.
+
+S6
+
+Derived-state persistence.
+
+Critical invariant:
+
+load_state != estimate_state
+
+S7
+
+EconomicState semantic foundation.
+
+Provider-specific semantics must be validated before canonical promotion.
+
+Do not silently equate:
+
+- pool difficulty;
+- network difficulty;
+- share target;
+- miner difficulty;
+- reward;
+- price;
+- profitability.
+
+Then complete:
+
+- integration;
+- replay;
+- adversarial/security testing;
+- resource-bound testing;
+- full regression;
+- independent review;
+- remediation;
+- M3.2 closure/freeze.
+
+======================================================================
+21. DO NOT PUT AI INTO CURRENT M3.2
+======================================================================
+
+The current concrete M3.2 implementation authority excludes:
+
+- future prediction;
+- calibration;
+- reward target control;
+- learning;
+- AI/ML inference;
+- live control.
+
+Therefore do not smuggle AI into M3.2.
+
+First close the deterministic foundation.
+
+======================================================================
+22. POST-M3.2 INTELLIGENCE ARCHITECTURE
+======================================================================
+
+The intended future architecture is NOT a monolithic AI.
+
+Use:
+
+validated observations
+→ deterministic EstimatedState
+→ EconomicState
+→ specialist prediction models
+→ deterministic PredictionCoordinator
+→ calibration/uncertainty
+→ candidate generation
+→ M2 Policy
+→ M2 DecisionScorer
+→ M2 DecisionRanker
+→ M2 Decision Engine
+→ Safe Control
+→ bounded execution
+→ Outcome
+→ Reward Evaluation
+→ learning/calibration
+→ explicit promotion
+
+======================================================================
+23. SPECIALIST PREDICTION MODELS
+======================================================================
+
+Prefer narrow models:
+
+Performance
+- effective hashrate
+- performance response
+- efficiency response
+
+Thermal/Power
+- temperature response
+- power response
+- thermal margin
+- settling
+
+Stability
+- variance
+- instability
+- rejects/stales
+- failure/restart risk where evidence supports it
+
+Network/Pool
+Only when semantic evidence supports prediction.
+
+Economic/Reward
+Expected reward/reward rate using explicit EconomicState and RewardContract semantics.
+
+Hashrate alone does not equal reward.
+
+======================================================================
+24. MODEL POLICY
+======================================================================
+
+Start simple:
+
+naive baseline
+→ robust/rolling statistics
+→ linear/regularized model
+→ justified time-series model
+→ tree-based model if useful
+→ higher complexity only after measurable superiority
+
+Do not begin with reinforcement learning.
+
+Prevent future leakage.
+
+Use time-aware replay/backtesting.
+
+Models are immutable/versioned.
+
+Learning creates challengers.
+
+It does not mutate the production model silently.
+
+Promotion initially requires explicit human approval.
+
+======================================================================
+25. STRATEGIC LLM ROLE
+======================================================================
+
+The LLM belongs to the slow strategic layer.
+
+It may:
+
+- explain;
+- analyze;
+- generate hypotheses;
+- propose investigations;
+- design bounded experiments;
+- produce strategy recommendations.
+
+It may NOT:
+
+- create telemetry;
+- invent Evidence;
+- rewrite state;
+- replace Prediction authority;
+- score DUS;
+- override Policy;
+- rank candidates;
+- authorize execution;
+- change GPU settings;
+- restart miner;
+- switch pool;
+- alter wallet settings;
+- self-promote a model.
+
+Structured LLM outputs must distinguish:
+
+- FACT
+- DERIVED_FACT
+- PREDICTION
+- HYPOTHESIS
+- ASSUMPTION
+- RECOMMENDATION
+
+LLM prose is not Evidence.
+
+======================================================================
+26. OUTCOME / REWARD / LEARNING
+======================================================================
+
+Maintain:
+
+Prediction != Outcome
+
+Outcome must support:
+
+- PerformanceWindowOutcome
+- ActionOutcome
+
+A valid Outcome may exist when NO_ACTION occurred.
+
+Reward must measure realized results over real elapsed evaluation time.
+
+Future learning loop:
+
+PredictionArtifact
++
+Outcome
++
+RealizedReward
+→ comparison
+→ error/calibration
+→ LearningProposal
+→ challenger
+→ replay/backtest
+→ independent verification
+→ explicit promotion
+
+Do not live-mutate a model from one prediction error.
+
+======================================================================
+27. SAFE CONTROL
+======================================================================
+
+Safe Control is not another Decision Engine.
+
+Conceptual flow:
+
+DecisionResult
+→ ActionRequest
+→ CapabilityGate
+→ FreshnessGate
+→ StabilityGate
+→ ExecutionSafetyGate
+→ AuthorizationGate
+→ ExecutionAttempt
+→ verification
+→ Outcome
+
+If state drift invalidates the selected decision:
+
+return to Decision Engine.
+
+Do not silently select another action inside Safe Control.
+
+======================================================================
+28. MINING CONTINUITY COST
+======================================================================
+
+Optimization must eventually account for:
+
+- restart downtime;
+- warm-up;
+- reconnect time;
+- lost shares/work;
+- stale/rejected shares;
+- instability;
+- recovery time;
+- transition cost.
+
+A profile with superior steady-state performance may still produce lower realized reward per real-time block.
+
+======================================================================
+29. THREE TIMESCALES
+======================================================================
+
+FAST deterministic
+Safety, hard bounds, fail-closed behavior.
+
+MEDIUM statistical/control
+State, prediction, target tracking, optimization, bounded adaptation.
+
+SLOW strategic
+LLM investigation, hypotheses, experiments, explanation.
+
+Safety must not depend on the slow layer.
+
+======================================================================
+30. IMPLEMENTATION DISCIPLINE
+======================================================================
+
+For every implementation slice:
+
+read-only preflight
+→ authority check
+→ exact writable paths
+→ minimal diff
+→ focused tests
+→ regressions
+→ adversarial checks
+→ static checks
+→ independent recheck
+→ checkpoint
+
+Never invent missing semantics.
+
+If an implementation needs authority that does not exist:
+
+M3_IMPLEMENTATION_BLOCKED_BY_UNRESOLVED_SEMANTIC
+
+Then identify the minimum clarification required.
+
+======================================================================
+31. HUMAN OWNER WORKFLOW
+======================================================================
+
+The project owner is not primarily a programmer.
+
+When manual execution is necessary:
+
+- provide complete ready-to-paste PowerShell;
+- clearly state READ-ONLY or WRITE-CAPABLE;
+- do not provide incomplete command fragments;
+- preserve hashes and checkpoint identities;
+- explain important outcomes plainly;
+- do not ask for facts already provable from repository evidence.
+
+When producing prompts for another coding agent always include:
+
+Recommended Model:
+Mode:
+Reasoning Effort:
+Mode/model switching allowed:
+
+Do not put those headers inside manual PowerShell.
+
+======================================================================
+32. LIVE EXECUTION AUTHORITY
+======================================================================
+
+Nothing in this handoff grants authority for automatic:
+
+- GPU clock changes;
+- power changes;
+- voltage changes;
+- fan control;
+- miner restarts;
+- pool switching;
+- algorithm switching;
+- wallet modifications;
+- autonomous unrestricted execution.
+
+Those require later accepted Safe Control architecture and explicit authorization.
+
+======================================================================
+33. GOVERNING PRINCIPLE
+======================================================================
+
+MiningGuardian must never become:
+
+LLM sees numbers
+→ LLM guesses configuration
+→ GPU changes
+
+The mature system must become:
+
+measured reality
+→ validated evidence
+→ deterministic state
+→ economic context
+→ calibrated prediction
+→ explicit candidate
+→ deterministic policy/scoring/ranking
+→ independent safety authorization
+→ bounded reversible execution
+→ measured Outcome
+→ realized Reward
+→ prediction-vs-reality
+→ calibrated learning
+→ explicit model promotion
+
+When evidence is insufficient:
+
+preserve uncertainty.
+
+When authority is absent:
+
+stop.
+
+When a result cannot be justified:
+
+fail closed.
+
+======================================================================
+34. BEGIN NOW
+======================================================================
+
+Begin only with:
+
+MININGGUARDIAN FULL PROJECT FORENSIC TAKEOVER — READ ONLY
+
+Inspect the entire repository before coding.
+
+Your first substantive deliverable is the forensic report described above.
+
+End that report with exactly:
+
+TAKEOVER_VERIFIED_CONTINUE_R5
+
+or:
+
+TAKEOVER_BLOCKED
