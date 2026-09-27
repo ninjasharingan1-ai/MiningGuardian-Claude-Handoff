@@ -1,0 +1,629 @@
+ADR-0006 v0.6
+MiningGuardian Decision Engine Specification
+Decision Lifecycle, State Machine & Persistence Architecture
+
+Status: Draft v0.6
+Milestone: M2.2.2
+Purpose: Define the executable architecture of the Decision Engine.
+
+58. Decision Engine Architectural Position
+
+The Decision Engine is positioned between:
+
+Cognitive Understanding
+
+and
+
+Future Execution Layer
+
+It does NOT control hardware.
+
+Its responsibility is:
+
+Convert validated knowledge into ranked, explainable, and measurable decisions.
+
+Complete flow:
+
+WORLD STATE
+
+      ↓
+
+Evidence Foundation
+
+      ↓
+
+Cognitive Analysis
+
+      ↓
+
+Decision Engine
+
+      ↓
+
+Decision Record
+
+      ↓
+
+Learning Memory
+59. Decision Lifecycle Model
+
+Every decision follows a controlled lifecycle:
+
+DETECTED
+
+   ↓
+
+ANALYZING
+
+   ↓
+
+PROPOSED
+
+   ↓
+
+VALIDATING
+
+   ↓
+
+APPROVED / REJECTED
+
+   ↓
+
+EXECUTED (Future)
+
+   ↓
+
+OBSERVED RESULT
+
+   ↓
+
+LEARNED
+60. Decision State Definitions
+60.1 DETECTED
+
+A significant change has been identified.
+
+Examples:
+
+effective hashrate decrease
+reward opportunity detected
+thermal behaviour changed
+
+Input:
+
+{
+"event":
+"hashrate_degradation",
+
+"confidence":
+0.62
+}
+
+No decision exists yet.
+
+60.2 ANALYZING
+
+The system gathers:
+
+evidence
+historical context
+possible causes
+
+Output:
+
+{
+"hypotheses":[
+"pool_issue",
+"thermal_issue"
+]
+}
+60.3 PROPOSED
+
+The system creates candidate decisions.
+
+Example:
+
+{
+"candidate":
+
+"evaluate_pool_change",
+
+"expected_gain":
+
+0.04
+}
+60.4 VALIDATING
+
+The system checks:
+
+Evidence
+
+Do we have enough proof?
+
+Economics
+
+Is expected gain meaningful?
+
+Safety
+
+Is risk acceptable?
+
+60.5 APPROVED
+
+The decision passed all gates.
+
+Example:
+
+{
+"decision":
+
+"APPROVED",
+
+"confidence":
+
+0.87
+}
+
+Important:
+
+Approved does NOT mean executed.
+
+It means:
+
+The decision is technically justified.
+
+60.6 REJECTED
+
+The engine records:
+
+rejected option
+reason
+evidence
+
+Example:
+
+{
+"decision":
+
+"REJECTED",
+
+"reason":
+
+"Gain lower than switching cost"
+}
+60.7 EXECUTED (Future)
+
+Reserved for future control layer.
+
+M2.2.2 does not execute.
+
+60.8 LEARNED
+
+After outcome measurement:
+
+Compare:
+
+Prediction:
+
+Expected +5%
+
+Reality:
+
+Actual +2%
+
+Store:
+
+Prediction error
+61. Decision Object Model
+
+Core object:
+
+DecisionRecord
+
+Contains:
+
+decision_id
+
+timestamp
+
+world_state_reference
+
+evidence_ids
+
+hypothesis_ids
+
+candidate_actions
+
+selected_action
+
+confidence
+
+risk_score
+
+expected_gain
+
+decision_state
+
+explanation
+
+outcome_reference
+62. Candidate Action Schema
+
+Every possible action:
+
+CandidateAction
+
+Structure:
+
+{
+"id":
+"candidate_001",
+
+"type":
+"POOL_EVALUATION",
+
+"expected_reward_gain":
+0.05,
+
+"confidence":
+0.78,
+
+"risk":
+0.15,
+
+"cost":
+0.02,
+
+"reversible":
+true,
+
+"requires_execution":
+false
+}
+63. Decision Scoring Storage
+
+The engine stores not only the winner.
+
+It stores all evaluated options.
+
+Example:
+
+{
+"ranking":[
+
+{
+"action":
+"stay_current",
+
+"score":
+0.72
+},
+
+{
+"action":
+"switch_pool",
+
+"score":
+0.68
+},
+
+{
+"action":
+"increase_power",
+
+"score":
+0.41
+}
+
+]
+}
+
+This is critical for future learning.
+
+64. Database Architecture
+
+M2.2.2 introduces new cognitive persistence.
+
+Existing tables remain untouched.
+
+New tables:
+
+decision_candidates
+
+Purpose:
+
+Store generated possibilities.
+
+Fields:
+
+id
+
+decision_id
+
+action_type
+
+expected_gain
+
+risk
+
+confidence
+
+score
+
+created_at
+decision_evaluations
+
+Purpose:
+
+Store ranking calculations.
+
+Fields:
+
+id
+
+candidate_id
+
+benefit_score
+
+risk_score
+
+uncertainty_score
+
+final_score
+
+model_version
+decision_outcomes
+
+Purpose:
+
+Compare prediction vs reality.
+
+Fields:
+
+id
+
+decision_id
+
+expected_result
+
+actual_result
+
+difference
+
+lesson_generated
+
+created_at
+65. Integration With Existing M2.2.1
+
+M2.2.2 consumes:
+
+From Evidence Foundation:
+
+EvidenceItem
+
+Claim
+
+Hypothesis
+
+ReasoningResult
+
+DecisionRecord
+
+It does NOT replace them.
+
+Relationship:
+
+Evidence
+
+ ↓
+
+Hypothesis
+
+ ↓
+
+Decision Candidate
+
+ ↓
+
+Decision Evaluation
+
+ ↓
+
+Decision Record
+66. Decision Engine API Boundary
+
+The internal interface:
+
+DecisionEngine.evaluate(
+    context:
+    AgentWorkingMemory
+)
+
+Returns:
+
+DecisionResult
+
+Example:
+
+{
+"state":
+
+"HOLD",
+
+"selected_action":
+
+"NONE",
+
+"confidence":
+
+0.91,
+
+"explanation":
+
+"Current configuration remains optimal"
+}
+67. Decision Safety Gates
+
+Every decision must pass:
+
+Gate 1 — Evidence Gate
+
+Question:
+
+Do we know enough?
+
+Gate 2 — Economic Gate
+
+Question:
+
+Is the expected reward improvement meaningful?
+
+Gate 3 — Risk Gate
+
+Question:
+
+Is the downside acceptable?
+
+Gate 4 — Continuity Gate
+
+Question:
+
+Does this threaten mining uptime?
+
+Only:
+
+PASS + PASS + PASS + PASS
+
+creates:
+
+APPROVED
+68. Decision Explainability Requirement
+
+Every decision MUST answer:
+
+Why this decision?
+
+Example:
+
+Current pool degradation detected.
+
+Alternative pool estimated +4.2% effective reward.
+
+Switch cost estimated 1.8%.
+
+Expected net improvement:
++2.4%.
+
+Confidence:
+82%.
+
+Decision:
+APPROVED FOR FUTURE EXECUTION.
+69. Learning Architecture
+
+Every completed decision creates:
+
+Decision
+
+↓
+
+Prediction
+
+↓
+
+Outcome
+
+↓
+
+Error Analysis
+
+↓
+
+Knowledge Update
+
+The system learns:
+
+which predictions were accurate
+which assumptions failed
+which actions were profitable
+which risks were underestimated
+70. M2.2.2 Implementation Boundary
+Implement now:
+
+✅ Decision models
+✅ State machine
+✅ Candidate generation interface
+✅ Ranking engine
+✅ Scoring engine
+✅ Persistence
+✅ Simulation mode
+✅ Outcome tracking
+
+Explicitly forbidden:
+
+❌ GPU writes
+❌ Clock changes
+❌ Voltage changes
+❌ Fan control
+❌ Miner restart
+❌ Pool switching
+❌ Wallet changes
+
+71. Final Architecture After v0.6
+                 Mining Reality
+
+                       ↓
+
+              World State Builder
+
+                       ↓
+
+             Evidence Foundation
+
+                       ↓
+
+          Cognitive Interpretation Layer
+
+                       ↓
+
+          Candidate Generation Engine
+
+                       ↓
+
+          Prediction & Risk Analysis
+
+                       ↓
+
+          Decision Ranking Engine
+
+                       ↓
+
+             Decision State Machine
+
+                       ↓
+
+              Decision Journal
+
+                       ↓
+
+              Learning Memory
+
+
+                       ↓
+
+             Future Control Layer
+72. Final Decision Philosophy
+
+MiningGuardian follows:
+
+"A decision is not valuable because it changes the system. A decision is valuable because evidence proves that the expected improvement exceeds its cost and risk."
+
+The best agent is not the one that acts most frequently.
+
+The best agent is the one that:
+
+understands reality
+evaluates alternatives
+explains choices
+learns from outcomes
+acts only when justified

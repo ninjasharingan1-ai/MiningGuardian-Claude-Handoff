@@ -1,0 +1,166 @@
+MiningGuardian — M2.2 Architecture Documentation Package
+
+ADR-0004 — Autonomous Mining Cognitive Control System Architecture
+
+Status: Accepted
+
+Decision: MiningGuardian evolves from a mining optimizer into an
+Autonomous Mining Cognitive Control System.
+
+Architecture layers:
+
+1.  Observation Intelligence
+
+-   GPU telemetry
+-   Miner telemetry
+-   Blockchain data
+-   Pool data
+
+2.  World Model
+
+-   Current reality
+-   Historical context
+-   Evidence state
+
+3.  Cognitive Intelligence
+
+-   LLM reasoning
+-   Hypothesis generation
+-   Strategy planning
+
+4.  Predictive Intelligence
+
+-   ML models
+-   Forecasting
+-   Anomaly detection
+
+5.  Optimization Intelligence
+
+-   Search
+-   Experiments
+-   Parameter optimization
+
+6.  Control Intelligence
+
+-   Bounded actions
+-   Rollback
+-   Safety policies
+
+LLM Role:
+
+The LLM is the strategic reasoning component.
+
+It handles: - interpretation - hypotheses - experiment planning -
+explanation
+
+It does not handle: - raw sensor reading - real-time control loops - GPU
+tuning every second - deterministic calculations
+
+Time loops:
+
+Fast loop: Telemetry and safety.
+
+Medium loop: Prediction and optimization.
+
+Slow loop: Strategy and planning.
+
+Autonomy safety flow:
+
+Observation | Evidence Validation | Reasoning | Proposal | Policy
+Validation | Execution | Measurement | Learning
+
+M2.2.1 Cognitive Evidence Foundation
+
+Objective:
+
+Build the cognitive foundation before adding any real AI model.
+
+Separate:
+
+Observation Evidence Claim Hypothesis Reasoning Result Decision
+
+Rules:
+
+Observation != Inference != Hypothesis != Conclusion
+
+Evidence must preserve:
+
+-   source
+-   origin
+-   timestamp
+-   conditions
+-   limitations
+-   reliability
+-   confidence rationale
+
+Truth hierarchy:
+
+1.  Measured live telemetry
+2.  Derived metrics
+3.  Historical measurements
+4.  External validated data
+5.  Validated lessons
+6.  Hypotheses
+7.  Model prior knowledge
+
+Engineering Governance:
+
+Before implementation inspect:
+
+-   AGENTS.md
+-   SPEC.md
+-   ADR documents
+-   tests
+-   interfaces
+-   storage ownership
+-   runtime behavior
+
+Never:
+
+-   convert hypothesis into fact
+-   convert correlation into causation
+-   treat model confidence as evidence confidence
+
+Decision records preserve:
+
+-   context
+-   known facts
+-   assumptions
+-   alternatives
+-   chosen approach
+-   rejected alternatives
+-   tradeoffs
+-   validation criteria
+-   remaining uncertainty
+
+No AI provider in M2.2.1:
+
+No: - LLM API - inference - training - reinforcement learning -
+autonomous execution
+
+Roadmap:
+
+M0/M1: Telemetry foundation
+
+M2.1: Shadow Agent Foundation
+
+M2.1.1: Live State and Freshness Hardening
+
+M2.2.1: Cognitive Evidence Foundation
+
+M2.2.2: Decision Engine Foundation + Evaluation Harness
+
+M2.2.3: LLM Strategic Reasoning Integration
+
+M2.2.4: Predictive Intelligence Foundation
+
+M2.3: Blockchain Intelligence Layer
+
+M3: Controlled Autonomous Optimization
+
+Project identity:
+
+MiningGuardian is:
+
+An autonomous cognitive control system where LLM reasoning is one
+intelligence component inside a larger validated architecture.

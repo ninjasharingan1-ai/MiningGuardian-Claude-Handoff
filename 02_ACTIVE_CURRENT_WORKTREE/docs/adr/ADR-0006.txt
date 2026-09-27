@@ -1,0 +1,470 @@
+ADR-0006
+MiningGuardian Decision Engine Specification
+
+Status: Draft
+Phase: M2.2.2
+Category: Cognitive Architecture / Decision Intelligence
+Supersedes: Informal optimization logic
+Depends on: M2.2.1 Evidence Foundation
+
+1. Decision
+
+MiningGuardian SHALL operate as a probabilistic decision engine rather than a direct optimization controller.
+
+The system SHALL NOT optimize based on a single metric such as:
+
+Reported Hashrate
+Instant Efficiency
+Current Pool Difficulty
+Single Share Event
+
+Instead, all operational decisions SHALL be based on:
+
+Expected Net Reward Improvement adjusted by confidence, risk, and intervention cost.
+
+2. Problem Definition
+
+Traditional mining optimization systems follow:
+
+Observe GPU
+        ↓
+Change Setting
+        ↓
+Measure Hashrate
+        ↓
+Keep/Revert
+
+MiningGuardian rejects this model.
+
+The system recognizes that:
+
+Reported Performance
+≠
+Economic Performance
+
+because mining outcome depends on:
+
+Effective submitted work
+Share acceptance behavior
+Pool latency
+Network conditions
+Thermal stability
+Power constraints
+Intervention cost
+
+Therefore the core question becomes:
+
+"Will this decision increase expected long-term reward under current uncertainty?"
+
+3. Core Decision Model
+
+The Decision Engine SHALL evaluate every candidate action using:
+
+Decision Value =
+Expected Benefit
+-
+Action Cost
+-
+Risk Penalty
+
+Where:
+
+Expected Benefit
+
+Represents estimated improvement:
+
+Expected Reward Gain =
+(Current Expected Reward)
+-
+(Baseline Expected Reward)
+Action Cost
+
+Includes:
+
+Restart Cost
++
+Warmup Loss
++
+Connection Loss
++
+Instability Risk
++
+Recovery Time
+Risk Penalty
+
+Includes:
+
+Thermal Risk
++
+Hardware Risk
++
+Evidence Uncertainty
++
+Prediction Error
+4. Decision Engine Pipeline
+
+The engine SHALL follow this sequence:
+
+Telemetry Collection
+
+        ↓
+
+Evidence Validation
+
+        ↓
+
+State Estimation
+
+        ↓
+
+Hypothesis Generation
+
+        ↓
+
+Candidate Evaluation
+
+        ↓
+
+Decision Scoring
+
+        ↓
+
+Action Authorization
+
+        ↓
+
+Result Verification
+
+No action may bypass this pipeline.
+
+5. Evidence Layer Dependency
+
+Decision Engine SHALL NOT directly consume raw telemetry.
+
+Raw signals:
+
+GPU Temperature
+Clock Speed
+Power
+Hashrate
+Accepted Shares
+Rejected Shares
+Latency
+
+must first become:
+
+Validated Evidence Objects
+
+Example:
+
+Raw:
+
+Hashrate dropped from 42TH/s to 39TH/s
+
+is insufficient.
+
+Evidence:
+
+Hashrate decline detected
+
+Confidence:
+0.82
+
+Supporting signals:
+
+- Accepted share rate decreased
+- Pool latency increased
+- GPU clock unchanged
+- Power stable
+
+Likely cause:
+Network degradation
+6. State Representation
+
+MiningGuardian SHALL maintain a continuous internal state:
+
+MiningState
+{
+ GPU_State
+
+ Network_State
+
+ Pool_State
+
+ Thermal_State
+
+ Economic_State
+
+ Confidence_State
+}
+
+Example:
+
+GPU_State:
+
+Core Clock:
+2035 MHz
+
+Power:
+50W
+
+Thermal:
+Stable
+
+Throttle:
+False
+
+Confidence:
+High
+7. Candidate Action Model
+
+Every possible action SHALL be represented as:
+
+CandidateAction
+{
+ ID
+
+ Type
+
+ ExpectedGain
+
+ ExpectedCost
+
+ Confidence
+
+ Risk
+
+ Reversible
+
+ RequiredDowntime
+}
+
+Examples:
+
+Action:
+
+Switch pool endpoint
+
+Expected Gain:
++3%
+
+Cost:
+20 seconds downtime
+
+Confidence:
+0.75
+
+Decision Engine evaluates:
+
+Gain > Cost + Risk ?
+8. Five-Minute Decision Cycle
+
+Five minutes SHALL represent:
+
+Decision Evaluation Window
+
+Not:
+
+Complete Statistical Truth Window
+
+The engine uses multiple horizons:
+
+5 min
+Current condition
+
+
+15 min
+Short trend
+
+
+60 min
+Baseline comparison
+
+
+Long-term
+Learning model
+9. Intervention Threshold
+
+MiningGuardian SHALL avoid unnecessary actions.
+
+An action is permitted only when:
+
+Expected Improvement
+
+>
+
+Minimum Required Improvement
+
+The threshold depends on:
+
+Action cost
+Confidence
+Risk
+
+Example:
+
+Low-cost action:
+
+Change monitoring parameter
+
+Required gain:
+0.5%
+
+High-cost action:
+
+Miner restart
+
+Required gain:
+>3-5%
+10. Restart Policy
+
+Miner restart SHALL be considered a high-cost action.
+
+Restart requires:
+
+Expected Gain
+
+>
+
+Restart Cost
+
++
+
+Safety Margin
+
+The system SHALL avoid:
+
+Frequent restarts
+Oscillation between configurations
+Reacting to temporary noise
+11. Decision Classes
+
+All decisions SHALL belong to one of:
+
+HOLD
+
+No intervention.
+
+Reason:
+
+Current state acceptable
+MONITOR
+
+Continue observation.
+
+Reason:
+
+Evidence insufficient
+ADJUST
+
+Apply reversible optimization.
+
+Example:
+
+Power target
+Clock profile
+Pool parameter
+RECOVER
+
+Execute corrective action.
+
+Example:
+
+Miner restart
+Connection recovery
+LEARN
+
+Record event for future models.
+
+12. Failure Prevention Rules
+
+Decision Engine MUST prevent:
+
+Hashrate obsession
+
+Rejected:
+
+Highest Hashrate = Best Decision
+Short-term reaction
+
+Rejected:
+
+One bad minute = Action
+Exploration without reward model
+
+Rejected:
+
+Try everything
+Restart loops
+
+Rejected:
+
+Optimize → Restart → Optimize → Restart
+13. Success Metrics
+
+MiningGuardian success SHALL be measured by:
+
+Primary:
+
+Expected Net Reward / Time
+
+Secondary:
+
+Reward Stability
+
+Energy Efficiency
+
+Uptime
+
+Decision Accuracy
+
+False Intervention Rate
+14. Architectural Principle
+
+The Decision Engine SHALL prefer:
+
+Correct Inaction
+
+over:
+
+Incorrect Optimization
+
+A system that knows when NOT to act is considered more intelligent than a system that constantly modifies parameters.
+
+15. Implementation Boundary
+
+M2.2.2 SHALL implement:
+
+✓ Decision models
+✓ Scoring system
+✓ Candidate evaluation
+✓ Confidence calculation
+✓ Action authorization rules
+
+M2.2.2 SHALL NOT implement:
+
+✗ Automatic overclocking
+✗ Miner control
+✗ Pool switching
+✗ Hardware modification
+
+Those belong to later execution layers.
+
+Final Principle
+
+MiningGuardian is not a controller that changes mining parameters.
+
+It is a cognitive layer that decides:
+
+"Is intervention economically justified, technically safe, and supported by sufficient evidence?"
+
+Only after answering YES may the execution layer act.
+
+هذه هي Draft v0.1 للـ ADR-0006 / M2.2.2.
+
+الخطوة التالية المنطقية قبل كتابة الكود هي تطويرها إلى v0.2 بإضافة:
+
+Decision scoring formula بشكل رياضي كامل
+Confidence engine
+State machine diagram
+JSON schemas للـ Evidence / CandidateAction / Decision objects

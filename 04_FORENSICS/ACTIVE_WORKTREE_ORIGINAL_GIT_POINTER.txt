@@ -1,0 +1,17 @@
+﻿MiningGuardian Active Worktree Git Pointer
+
+This file preserves the content of the .git worktree pointer that
+was present in the copied active worktree.
+
+The pointer itself was removed from the GitHub handoff copy because
+otherwise the outer handoff repository interprets
+02_ACTIVE_CURRENT_WORKTREE as a Git submodule/gitlink.
+
+The original source worktree was NOT modified.
+
+Original copied path:
+C:\MiningGuardian_Claude_Handoff\02_ACTIVE_CURRENT_WORKTREE\.git
+
+Original pointer content:
+gitdir: C:/MG_Golden/.git/worktrees/S4A_rewrite_01
+

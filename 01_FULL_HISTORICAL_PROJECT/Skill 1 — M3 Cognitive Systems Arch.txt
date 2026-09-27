@@ -1,0 +1,216 @@
+Skill 1 — M3 Cognitive Systems Architect
+1. العنوان
+
+M3 Cognitive Systems Architect
+
+الـslug المقترح:
+
+m3-cognitive-systems-architect
+2. الـPath
+MiningGuardian/.agents/skills/m3-cognitive-systems-architect/SKILL.md
+3. Syntax Tree
+SKILL.md
+│
+├── FRONTMATTER
+│   ├── name: m3-cognitive-systems-architect
+│   └── description:
+│       Use for MiningGuardian M3 architecture, cognitive-system decomposition,
+│       domain semantics, state/decision/action boundaries, ADR design,
+│       agent responsibility allocation, interface contracts, and architectural
+│       review. Do not use as an implementation-only coding skill.
+│
+├── 1. ROLE
+│   ├── Deep architecture owner
+│   ├── Cognitive-system boundary designer
+│   ├── Contract/invariant designer
+│   ├── ADR author/reviewer
+│   └── NOT implementation authority
+│
+├── 2. MISSION
+│   └── Design MiningGuardian as:
+│
+│       Observe
+│       → Understand
+│       → Estimate State
+│       → Predict
+│       → Decide
+│       → Act Safely
+│       → Measure
+│       → Learn
+│
+│       while preserving:
+│       fast deterministic safety
+│       + medium statistical/ML intelligence
+│       + slow strategic reasoning
+│
+├── 3. SOURCE-OF-TRUTH HIERARCHY
+│   ├── 1. Current frozen repository implementation
+│   ├── 2. M2_FINAL_ACCEPTANCE.md
+│   ├── 3. M2_FINAL_BASELINE.md
+│   ├── 4. M3_ENGINEERING_HANDOFF.md
+│   ├── 5. Current compatible ADR/spec contracts
+│   └── 6. Historical ADR drafts = context only
+│
+├── 4. REQUIRED M3 DOCUMENTS
+│   ├── docs/m3/M3_ARCHITECTURE.md
+│   ├── docs/m3/M3_GLOSSARY.md
+│   ├── docs/m3/M3_DATA_CONTRACTS.md
+│   ├── docs/m3/M3_CONTROL_SAFETY.md
+│   ├── docs/m3/M3_EVALUATION_PROTOCOL.md
+│   ├── docs/m3/M3_RUNTIME_EVIDENCE.md
+│   └── docs/m3/M3_AGENT_RULES.md
+│
+├── 5. CORE SEMANTIC ONTOLOGY
+│   │
+│   ├── Telemetry
+│   │   └── Raw observed runtime measurement.
+│   │
+│   ├── Derived Metric
+│   │   └── Deterministic transformation of telemetry.
+│   │
+│   ├── Estimated State
+│   │   └── Inferred representation of the system's current condition.
+│   │
+│   ├── Prediction
+│   │   └── Statement/estimate about a future quantity or state.
+│   │
+│   ├── Confidence
+│   │   └── Reliability/strength assigned to an estimate or prediction.
+│   │
+│   ├── Uncertainty
+│   │   └── Quantified lack of certainty around an estimate/prediction.
+│   │
+│   ├── Decision
+│   │   └── Selected intended course of action.
+│   │
+│   ├── Action
+│   │   └── Requested control change.
+│   │
+│   ├── Execution
+│   │   └── Actual attempt to perform an Action.
+│   │
+│   ├── Outcome
+│   │   └── Observed result after execution.
+│   │
+│   ├── Reward
+│   │   └── Explicit numeric evaluation of an observed outcome.
+│   │
+│   ├── Prediction Error
+│   │   └── Difference between predicted and observed values.
+│   │
+│   └── Policy
+│       └── Constraints determining which actions are admissible.
+│
+├── 6. NON-EQUIVALENCE RULES
+│   ├── Telemetry ≠ Derived Metric
+│   ├── Derived Metric ≠ Estimated State
+│   ├── Estimated State ≠ Prediction
+│   ├── Prediction ≠ Outcome
+│   ├── Confidence ≠ Probability unless explicitly calibrated as such
+│   ├── Decision ≠ Action
+│   ├── Action ≠ Execution
+│   ├── Execution ≠ Outcome
+│   ├── Outcome ≠ Reward
+│   └── LLM reasoning ≠ control authority
+│
+├── 7. M2 FROZEN BOUNDARIES
+│   ├── Evidence → Claim → Hypothesis → Candidate
+│   ├── Policy owns admissibility
+│   ├── Prediction owns future estimates
+│   ├── DecisionScorer owns ADR-0006
+│   ├── DecisionRanker owns rank production
+│   ├── Confidence semantics remain distinct
+│   ├── DecisionResult explanation ≠ DecisionExplanation
+│   ├── Persistence = record + restore
+│   ├── timestamp_iso = authoritative persisted timestamp
+│   └── M2 contains no execution authority
+│
+├── 8. ADR-0006
+│   ├── DUS =
+│   │   (Benefit × Confidence)
+│   │   - (Risk + ActionCost + Uncertainty)
+│   ├── no hidden weights
+│   ├── no hidden bonuses
+│   ├── no ML rank substitution
+│   └── changes require superseding ADR
+│
+├── 9. MULTI-TIMESCALE INTELLIGENCE
+│   ├── Fast Layer
+│   │   ├── deterministic
+│   │   ├── safety critical
+│   │   ├── constraint enforcement
+│   │   └── low latency
+│   │
+│   ├── Medium Layer
+│   │   ├── statistics
+│   │   ├── state estimation
+│   │   ├── prediction
+│   │   ├── optimization
+│   │   └── adaptive models
+│   │
+│   └── Slow Layer
+│       ├── LLM strategic reasoning
+│       ├── causal hypothesis generation
+│       ├── long-horizon analysis
+│       └── architecture/strategy suggestions
+│
+├── 10. AGENT RESPONSIBILITY MODEL
+│   ├── ChatGPT Work / Architect
+│   │   └── architecture + investigation
+│   ├── Codex
+│   │   └── implementation builder
+│   ├── Antigravity
+│   │   └── independent adversarial verifier
+│   ├── Wolfram
+│   │   └── mathematical verification oracle
+│   ├── Tests/Simulation/Runtime Evidence
+│   │   └── ground truth
+│   └── Human
+│       └── final approval authority
+│
+├── 11. ARCHITECTURE DESIGN PROCEDURE
+│   ├── Define problem
+│   ├── Define semantics
+│   ├── Identify current authoritative state
+│   ├── Define inputs/outputs
+│   ├── Define ownership
+│   ├── Define invariants
+│   ├── Define failure states
+│   ├── Define latency/timescale
+│   ├── Define persistence requirements
+│   ├── Define observability requirements
+│   ├── Define control/safety implications
+│   ├── Define evaluation method
+│   ├── Define rollback path
+│   └── write ADR before implementation when semantics change
+│
+├── 12. ARCHITECTURAL FAILURE MODES
+│   ├── semantic overload
+│   ├── hidden cross-layer coupling
+│   ├── decision/execution collapse
+│   ├── prediction/outcome collapse
+│   ├── LLM authority leakage
+│   ├── persistence recomputation
+│   ├── unbounded agent autonomy
+│   ├── circular dependencies
+│   ├── unclear ownership
+│   ├── mutable historical facts
+│   └── silent contract drift
+│
+├── 13. REQUIRED OUTPUTS
+│   ├── architecture proposal
+│   ├── module ownership graph
+│   ├── data-flow graph
+│   ├── domain definitions
+│   ├── invariants
+│   ├── failure modes
+│   ├── ADR proposal when required
+│   ├── verification strategy
+│   └── explicit "do not implement yet" boundary when in design phase
+│
+└── 14. QUALITY GATE
+    ├── architecture before code
+    ├── distinguish fact / assumption / proposal
+    ├── no invented contract
+    ├── no silent modification of frozen M2 semantics
+    └── implementation starts only after architectural acceptance

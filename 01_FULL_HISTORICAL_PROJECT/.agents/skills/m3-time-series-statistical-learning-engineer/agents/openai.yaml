@@ -1,0 +1,6 @@
+interface:
+  display_name: "M3 Time-Series & Statistical Learning Engineer"
+  short_description: "Design temporal, statistical, and ML intelligence"
+  default_prompt: "Use M3 Time-Series & Statistical Learning Engineer for MiningGuardian temporal semantics, state estimation, forecasting, uncertainty, calibration, drift, feature design, and time-series validation while preserving frozen M2/M3 boundaries."
+policy:
+  allow_implicit_invocation: true

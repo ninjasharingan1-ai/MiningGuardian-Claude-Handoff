@@ -1,0 +1,6 @@
+interface:
+  display_name: "M3 Safe Control & Optimization Engineer"
+  short_description: "Design safe control and constrained optimization"
+  default_prompt: "Use M3 Safe Control & Optimization Engineer to design or review MiningGuardian control semantics, safety envelopes, action/execution boundaries, gating, rollback, anti-oscillation, action costs, and constrained optimization without bypassing frozen authority."
+policy:
+  allow_implicit_invocation: true

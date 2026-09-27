@@ -1,0 +1,49 @@
+﻿# ============================================================
+# MiningGuardian Claude Handoff
+# GitHub transport exclusions
+# ============================================================
+
+# Python environments / generated caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+
+# Runtime databases / transient state
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE / OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Original binary archives are deliberately omitted from Git.
+# Their extracted contents exist in this handoff repository.
+*.zip
+
+# Portable Git bundle snapshots are forensic binary artifacts.
+# Textual Git reports remain committed and readable.
+*.bundle
+
+# Other temporary binary/archive material
+*.7z
+*.rar
+*.tar
+*.gz
+
+# Local temporary files
+*.tmp
+*.temp

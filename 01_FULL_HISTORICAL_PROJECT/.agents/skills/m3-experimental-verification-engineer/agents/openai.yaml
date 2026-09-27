@@ -1,0 +1,6 @@
+interface:
+  display_name: "M3 Experimental Verification Engineer"
+  short_description: "Verify M3 behavior with independent evidence"
+  default_prompt: "Use M3 Experimental Verification Engineer for independent read-only review, experimental design, mathematical validation, simulation, replay, fault injection, regression analysis, and evidence-based acceptance of MiningGuardian claims."
+policy:
+  allow_implicit_invocation: true

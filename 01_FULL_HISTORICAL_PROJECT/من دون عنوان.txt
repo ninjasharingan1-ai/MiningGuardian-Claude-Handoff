@@ -1,0 +1,1096 @@
+
+
+Skills:
+
+* M3 Cognitive Systems Architect
+* M3 Time-Series & Statistical Learning Engineer
+* M3 Runtime Observability Engineer
+* M3 Experimental Verification Engineer
+* M3 Safe Control & Optimization Engineer — boundary guard only
+
+For every activated Skill:
+
+* Load its complete Skill directory.
+* Read its agent YAML configuration first.
+* Read its SKILL.md.
+* Load mandatory referenced resources relevant to this task.
+* Do not treat a Skill as active unless the complete required package is loaded.
+
+Plugin Recommendation:
+
+* Plugin: NONE — not required
+* Plugin Type: semantic / architecture contract resolution
+* Review Task: No plugin materially improves the primary semantic decisions in this phase.
+* Why Needed: This task resolves architecture contracts from frozen authority and repository evidence, not code behavior.
+
+Security Test Decision:
+
+* SECURITY_TEST_REQUIRED: NO
+* Security Scope: NONE
+* Reason: No implementation or runtime behavior is being modified. Security/trust-boundary requirements must be specified for later implementation, but no security tests should run in this phase.
+
+---
+
+# MiningGuardian M3.2 — SEMANTIC CONTRACT RESOLUTION
+
+## 1. Mission
+
+Resolve ONLY the semantic blockers identified by the completed:
+
+```text
+M3.2 READ-ONLY PREFLIGHT
+```
+
+The preflight verdict was:
+
+```text
+BLOCKED_BY_SEMANTIC_CONFLICT
+```
+
+This does NOT mean the frozen M3 architecture is contradictory.
+
+The preflight explicitly established that the missing items are operational semantic decisions required before M3.2 implementation can be handed off.
+
+This task must convert those unresolved decisions into explicit, internally consistent M3.2 contracts.
+
+Do NOT implement code.
+
+Do NOT modify frozen M2, M3.0, or M3.1 files.
+
+Do NOT build providers.
+
+Do NOT choose control actions.
+
+Do NOT introduce prediction.
+
+Do NOT calculate reward.
+
+The output must be sufficiently precise to support creation of:
+
+```text
+M3.2_IMPLEMENTATION_HANDOFF
+```
+
+without allowing Codex to invent semantics during coding.
+
+---
+
+# 2. Authority
+
+Use this order:
+
+```text
+1. Frozen M2 implementation
+2. M2_FINAL_ACCEPTANCE.md
+3. M2_FINAL_BASELINE.md
+4. M3.0_FINAL_ACCEPTANCE.md
+5. M3.0_FINAL_BASELINE.md
+6. M3.0_FINAL_FREEZE_MANIFEST.md
+7. Canonical frozen M3.0 documents
+8. M3.1_FINAL_ACCEPTANCE.md
+9. M3.1_FINAL_BASELINE.md
+10. M3.1_FINAL_FREEZE_MANIFEST.md
+11. Accepted M3.1 implementation evidence
+12. M3.2 READ-ONLY PREFLIGHT REPORT
+13. Relevant project Skills
+14. Repository evidence
+```
+
+No lower authority may silently redefine a higher authority.
+
+---
+
+# 3. Preserve these boundaries
+
+The resulting M3.2 contracts MUST preserve:
+
+```text
+RuntimeObservation ≠ EstimatedState
+
+EstimatedState ≠ Prediction
+
+Prediction ≠ Outcome
+
+Current Economic State ≠ Reward
+
+State Confidence ≠ Prediction Confidence
+
+State Confidence ≠ Observation Quality
+
+State Confidence ≠ Freshness
+
+Uncertainty ≠ Missing
+
+Missing ≠ Zero
+
+Derived Current State ≠ Future Forecast
+
+M3 Runtime Evidence Persistence
+≠
+M2 DecisionEvaluationRepository
+
+M3.2 state estimation
+≠
+M2 DecisionPolicy
+
+M3.2 economic context
+≠
+RewardEvaluation
+
+LLM reasoning
+≠
+state authority
+```
+
+---
+
+# 4. Resolve Blocker A — EstimatedState validity
+
+Define what makes an `EstimatedState` field valid.
+
+Do not require the entire snapshot to be all-or-nothing unless frozen authority requires it.
+
+The preferred semantic model should evaluate whether:
+
+```text
+individual estimated fields
+```
+
+can independently be:
+
+```text
+VALID
+DEGRADED
+UNKNOWN
+INVALID
+```
+
+or an equivalent explicit vocabulary.
+
+Resolve:
+
+```text
+Can a snapshot contain both valid and unavailable fields?
+
+Can an EstimatedState snapshot exist when one domain is missing?
+
+What makes the snapshot itself usable?
+
+What makes a single field usable?
+
+How is a field represented when evidence is insufficient?
+```
+
+Do NOT use numeric zero to represent unavailable state.
+
+Do NOT silently copy M2 ContextValidity semantics.
+
+Provide explicit invariants.
+
+---
+
+# 5. Resolve Blocker B — State confidence
+
+Define `StateConfidence` as a distinct concept.
+
+It must NOT be:
+
+```text
+M2 Decision Confidence
+Observation Quality
+Freshness
+Evidence Reliability
+```
+
+Define what confidence means semantically.
+
+Recommended interpretation to evaluate:
+
+```text
+confidence = strength of support for the current estimated value
+given the available evidence and estimator method
+```
+
+Resolve whether confidence should initially be:
+
+```text
+categorical
+numeric
+or structured
+```
+
+Prefer the simplest deterministic contract that does not create false precision.
+
+If numeric confidence cannot be justified from current evidence:
+
+```text
+do not invent a probability
+```
+
+A categorical model such as:
+
+```text
+HIGH
+MEDIUM
+LOW
+UNKNOWN
+```
+
+may be considered if consistent with frozen architecture.
+
+Do not adopt it automatically; justify the final choice.
+
+---
+
+# 6. Resolve Blocker C — State uncertainty
+
+Define `StateUncertainty` separately from confidence.
+
+It should capture what remains unresolved about the estimated state.
+
+Consider whether uncertainty needs structured dimensions such as:
+
+```text
+measurement uncertainty
+temporal uncertainty
+source disagreement
+evidence incompleteness
+identity uncertainty
+method limitation
+```
+
+Do not force these into a single fake numeric score unless justified.
+
+Resolve:
+
+```text
+Can confidence be high while some known limitation remains?
+
+Can uncertainty be present while a field is still usable?
+
+How should unknown uncertainty differ from known uncertainty?
+```
+
+---
+
+# 7. Resolve Blocker D — Evidence completeness
+
+Define the minimum evidence requirement for producing an estimated field.
+
+Do not define one universal minimum for every field.
+
+Create a rule such as:
+
+```text
+each state field declares its required evidence contract
+```
+
+The contract may distinguish:
+
+```text
+REQUIRED evidence
+OPTIONAL supporting evidence
+CONFLICTING evidence
+UNAVAILABLE evidence
+```
+
+Resolve how evidence completeness influences:
+
+```text
+validity
+confidence
+uncertainty
+limitations
+```
+
+without collapsing them into one field.
+
+---
+
+# 8. Resolve Blocker E — Reference time
+
+Define one authoritative:
+
+```text
+state_reference_time
+```
+
+for an EstimatedState snapshot.
+
+It must represent:
+
+```text
+the current-state instant against which included evidence is evaluated
+```
+
+Resolve whether it should normally be:
+
+```text
+explicitly supplied by caller
+```
+
+rather than implicitly calling the wall clock inside reconstruction.
+
+Preferred determinism rule:
+
+```text
+same observations
++
+same configuration
++
+same reference time
++
+same method version
+=
+same EstimatedState
+```
+
+Do not allow reconstruction to depend silently on current wall clock.
+
+---
+
+# 9. Resolve Blocker F — Temporal alignment
+
+Define how observations from different sources are allowed to contribute to the same state snapshot.
+
+Account for:
+
+```text
+different polling cadence
+missing source observation_time
+receipt-time-only evidence
+stale observations
+out-of-order observations
+clock disagreement
+reset/discontinuity
+```
+
+Do NOT require exact timestamp equality.
+
+Define an explicit alignment policy based on:
+
+```text
+reference time
+source timestamp availability
+freshness
+allowed evidence window
+quality
+```
+
+Do not reuse legacy future-time clamping.
+
+Future/inconsistent timestamps must not silently become fresh.
+
+---
+
+# 10. Resolve Blocker G — Source disagreement
+
+Define a first-class representation for conflicting evidence.
+
+Do NOT silently choose:
+
+```text
+latest source
+preferred source
+highest value
+lowest value
+```
+
+unless an explicit source-authority rule exists.
+
+Distinguish:
+
+```text
+source disagreement
+source failure
+missing evidence
+identity mismatch
+temporal misalignment
+```
+
+A conflict should remain visible in provenance/limitations.
+
+Resolve whether conflicting evidence can produce:
+
+```text
+a degraded estimate
+an unknown estimate
+an invalid estimate
+```
+
+based on field-specific rules.
+
+Do not invent universal resolution precedence where none is justified.
+
+---
+
+# 11. Resolve Blocker H — Stale evidence
+
+Define how stale evidence affects state.
+
+Stale evidence may remain historically valid evidence but should not automatically support current state.
+
+Resolve:
+
+```text
+Can stale evidence contribute to a degraded field?
+
+When must stale evidence be excluded?
+
+Can a last-known value be retained as context while state validity becomes UNKNOWN?
+
+How are limitations recorded?
+```
+
+Do not relabel stale data as current.
+
+---
+
+# 12. Resolve Blocker I — Discontinuity and counters
+
+Define rules for cumulative counters and rate-like features.
+
+Counter reset/discontinuity must prevent unsafe delta/rate calculation across the discontinuity.
+
+Resolve:
+
+```text
+when a rate is unavailable
+when a new continuity segment begins
+what provenance must identify the segment
+how uncertainty is represented when incarnation is unknown
+```
+
+Do not infer miner restart solely from a counter or uptime decrease.
+
+---
+
+# 13. Resolve Blocker J — Current-state features
+
+Classify permitted M3.2 derived features.
+
+Examples:
+
+```text
+rolling mean
+median
+min/max
+delta
+rate
+slope over historical window
+missing fraction
+```
+
+These may remain:
+
+```text
+current descriptive / temporal-context features
+```
+
+provided they do not assert future behavior.
+
+Explicitly define:
+
+```text
+historical slope ≠ prediction
+```
+
+Prediction begins only when the artifact claims a future state/value.
+
+---
+
+# 14. Resolve Blocker K — EstimatedState provenance
+
+Each estimated field must be traceable.
+
+Define required provenance including, where applicable:
+
+```text
+source observation IDs
+source instances
+evidence window
+state reference time
+estimation method
+method version
+configuration/parameters
+input quality
+input freshness
+conflict information
+limitations
+```
+
+Do not allow a derived state field whose supporting observations cannot be identified.
+
+---
+
+# 15. Resolve Blocker L — Estimation method versioning
+
+Define explicit method identity/version semantics.
+
+At minimum an EstimatedState field or snapshot should identify:
+
+```text
+method_name
+method_version
+```
+
+where the value depends on a transformation.
+
+Configuration affecting the result must also be reproducible.
+
+Do NOT build a general ML model registry in M3.2 unless required.
+
+The initial system may use deterministic statistical methods.
+
+---
+
+# 16. Resolve Blocker M — Derived-state persistence
+
+Resolve whether M3.2 uses:
+
+```text
+reconstruction only
+persistence only
+or
+both
+```
+
+Evaluate against frozen requirements:
+
+```text
+raw M3.1 evidence remains authoritative
+derived state must be reproducible
+persistence must not re-estimate during load
+```
+
+Preferred architecture to evaluate:
+
+```text
+M3.1 RuntimeObservation
+        ↓
+deterministic estimator
+        ↓
+EstimatedState
+        ↓
+optional versioned derived-state persistence
+```
+
+If EstimatedState is persisted:
+
+```text
+load must restore
+not re-run estimator
+```
+
+Raw observations remain source authority.
+
+A persisted state is a versioned derived artifact, not replacement evidence.
+
+---
+
+# 17. Resolve Blocker N — Reconstruction query requirements
+
+M3.1 currently supports cycle-based retrieval.
+
+Define what M3.2 requires from runtime evidence retrieval.
+
+Potential requirements:
+
+```text
+bounded time-window query
+session-scoped query
+source-scoped query
+signal-scoped query
+deterministic ordering
+maximum result limits
+```
+
+Do not specify database optimizations beyond what semantics require.
+
+Define the contract first.
+
+---
+
+# 18. Resolve Blocker O — EconomicState promotion
+
+Define what qualifies a value for promotion into canonical current `EconomicState`.
+
+A field must not be promoted merely because a miner/pool reports a number.
+
+Require explicit semantics such as applicable:
+
+```text
+provider/source identity
+coin/network identity
+algorithm identity
+unit
+currency/quote asset
+observation/effective time
+freshness
+quality
+source semantics
+```
+
+If any required semantic dimension is unknown:
+
+```text
+keep the value as raw observation/context
+do not promote it as authoritative EconomicState
+```
+
+---
+
+# 19. Resolve Blocker P — Pool difficulty
+
+The current miner-reported `difficulty` field has unknown semantics.
+
+Therefore:
+
+```text
+pool difficulty raw field
+≠
+network difficulty
+```
+
+until an authoritative source contract proves otherwise.
+
+Do not allow it into blockchain network state as network difficulty.
+
+It may remain:
+
+```text
+source-reported pool metadata with UNKNOWN interpretation
+```
+
+---
+
+# 20. Resolve Blocker Q — Blockchain providers
+
+No authoritative blockchain provider currently exists.
+
+Define provider requirements, not a specific provider yet.
+
+A future provider must expose enough evidence for:
+
+```text
+network identity
+difficulty
+block reward
+block interval/current block context
+source/provider identity
+observation time
+unit
+quality
+freshness
+```
+
+Do not select a live external provider in this semantic task.
+
+---
+
+# 21. Resolve Blocker R — Price providers
+
+No price provider currently exists.
+
+Define the contract required before a price may enter EconomicState.
+
+At minimum consider:
+
+```text
+base asset
+quote currency
+provider
+price
+timestamp
+freshness
+quality
+market/source identity
+```
+
+A configured/static price must NOT masquerade as live price.
+
+Static assumptions must be explicitly classified as:
+
+```text
+STATIC_CONFIGURATION
+```
+
+not observed market state.
+
+---
+
+# 22. Resolve Blocker S — Pool economics
+
+Define the evidence requirements for:
+
+```text
+pool fee
+payout scheme
+minimum payout
+conversion fee
+payout asset
+effective payout factor
+```
+
+Do not assume unMineable or another provider's current rules without source evidence.
+
+If not available:
+
+```text
+UNKNOWN
+```
+
+is the correct state.
+
+---
+
+# 23. Resolve Blocker T — EconomicState vs Reward
+
+Make explicit:
+
+```text
+EconomicState
+=
+current economic/blockchain context
+```
+
+It does NOT own:
+
+```text
+realized reward
+expected future reward
+reward target
+reward gap
+action utility
+optimal action
+```
+
+Those remain later-phase responsibilities.
+
+---
+
+# 24. Economic-source disagreement
+
+Define how multiple future economic providers will be represented if they disagree.
+
+Do not average or select providers silently.
+
+Require:
+
+```text
+provider-specific observations
+explicit conflict representation
+freshness comparison
+quality comparison
+```
+
+Any future provider-selection policy must be explicit and versioned.
+
+---
+
+# 25. State snapshot partial validity
+
+Resolve snapshot semantics.
+
+Recommended direction to evaluate:
+
+```text
+snapshot existence does not imply every field is valid
+```
+
+Each field should preserve its own:
+
+```text
+validity
+confidence
+uncertainty
+provenance
+limitations
+```
+
+The snapshot may additionally expose a summary completeness/validity status.
+
+Do not allow summary status to erase per-field detail.
+
+---
+
+# 26. Determinism contract
+
+Define this as a core M3.2 invariant:
+
+```text
+Fixed:
+- canonical observations
+- estimator configuration
+- reference time
+- method version
+
+must produce:
+- deterministic EstimatedState
+```
+
+No hidden:
+
+```text
+randomness
+wall-clock dependency
+external provider fetch
+unordered iteration
+mutable global state
+```
+
+during deterministic replay/reconstruction.
+
+External provider acquisition belongs before estimation as canonical evidence.
+
+---
+
+# 27. Security/trust rules for future implementation
+
+No tests now.
+
+Define future required security verification for:
+
+```text
+malicious but valid observations
+spoofed economic values
+wrong coin/network identity
+unit/currency mismatch
+timestamp manipulation
+poisoned state window
+provider disagreement
+conflict suppression
+oversized historical windows
+malformed economic metadata
+```
+
+Future implementation must treat these as trust-boundary cases.
+
+---
+
+# 28. Performance semantics
+
+Define bounded-data requirements without premature optimization.
+
+State estimation should operate over:
+
+```text
+explicit bounded windows
+```
+
+rather than unbounded full-history scans where possible.
+
+Any repository API added for M3.2 must support:
+
+```text
+bounded retrieval
+deterministic ordering
+explicit time/session/source filters
+```
+
+Do not select indexes or storage implementation in this semantic resolution unless required.
+
+---
+
+# 29. Required canonical semantic output
+
+Produce a proposed M3.2 contract set covering at minimum:
+
+```text
+EstimatedState
+EstimatedStateField
+StateValidity
+StateConfidence
+StateUncertainty
+StateConflict
+StateEvidenceReference
+StateSnapshot
+
+EconomicState
+EconomicStateField
+EconomicProviderReference
+```
+
+Class names are conceptual unless already frozen.
+
+For each define:
+
+```text
+responsibility
+required fields
+optional fields
+invariants
+forbidden interpretations
+ownership
+persistence implications
+```
+
+---
+
+# 30. Semantic decision table
+
+For every blocker from the preflight, output:
+
+```text
+Decision ID
+Question
+Chosen semantic rule
+Rejected alternatives
+Reason
+Frozen-contract compatibility
+Implementation consequence
+Test consequence
+```
+
+No blocker should remain implicit.
+
+---
+
+# 31. ADR requirement assessment
+
+For every semantic decision determine:
+
+```text
+NO_ADR_REQUIRED
+```
+
+if it is a direct operationalization of frozen M3.0 contracts,
+
+or:
+
+```text
+ADR_REQUIRED
+```
+
+if it introduces a material architectural choice not already settled by frozen authority.
+
+Do not create ADRs automatically.
+
+List the exact decisions requiring ADRs, if any.
+
+---
+
+# 32. Implementation readiness test
+
+Before final verdict, verify whether the resolved contracts now allow an implementation handoff to answer without guessing:
+
+```text
+What is EstimatedState?
+
+What makes a field valid?
+
+Can snapshots be partially valid?
+
+What does confidence mean?
+
+What does uncertainty mean?
+
+How is missing evidence handled?
+
+How is stale evidence handled?
+
+How is conflict represented?
+
+What is the reference time?
+
+How are sources temporally aligned?
+
+How are discontinuities handled?
+
+How is provenance stored?
+
+How are methods versioned?
+
+What is reconstructed versus persisted?
+
+What economic values qualify for promotion?
+
+What provider metadata is mandatory?
+
+What remains prediction/reward/control territory?
+```
+
+If any material item still requires Codex to invent behavior:
+
+```text
+do NOT declare readiness
+```
+
+---
+
+# 33. Required output
+
+Produce:
+
+```text
+M3.2 SEMANTIC CONTRACT RESOLUTION REPORT
+
+1. Executive Decision
+2. Authority Confirmation
+3. Skill Loading Report
+4. EstimatedState Definition
+5. State Field Validity
+6. Snapshot Partial-Validity Model
+7. State Confidence Contract
+8. State Uncertainty Contract
+9. Evidence Completeness Contract
+10. Reference-Time Contract
+11. Temporal Alignment Contract
+12. Source-Conflict Contract
+13. Stale/Missing Evidence Contract
+14. Continuity / Reset Contract
+15. Current-State Feature Boundary
+16. State Provenance Contract
+17. Estimation Method Versioning
+18. Determinism Contract
+19. Reconstruction / Persistence Decision
+20. Runtime Evidence Query Requirements
+21. EconomicState Definition
+22. Economic Promotion Requirements
+23. Blockchain Provider Requirements
+24. Price Provider Requirements
+25. Pool Economics Requirements
+26. Economic Provider Conflict Contract
+27. EconomicState vs Reward Boundary
+28. Security / Trust Requirements
+29. Performance / Bounded-Window Requirements
+30. Semantic Decision Matrix
+31. ADR Requirement Assessment
+32. Remaining Blockers
+33. M3.2 Handoff Readiness
+```
+
+---
+
+# 34. Final verdict
+
+Use exactly one:
+
+```text
+READY_FOR_M3.2_IMPLEMENTATION_HANDOFF
+READY_FOR_M3.2_HANDOFF_PENDING_ADRS
+SEMANTIC_REMEDIATION_REQUIRED
+BLOCKED_BY_FROZEN_CONTRACT_CONFLICT
+```
+
+Use:
+
+```text
+READY_FOR_M3.2_IMPLEMENTATION_HANDOFF
+```
+
+only if no unresolved semantic decision remains.
+
+Use:
+
+```text
+READY_FOR_M3.2_HANDOFF_PENDING_ADRS
+```
+
+only if the semantic design is complete but one or more material decisions require formal ADR acceptance before implementation.
+
+Do not implement anything.
+
+Stop after the semantic-resolution report.
+
+هالمرة استخدام **Astra — High** مبرر فعلًا، لأننا أمام قرارات رح تصير عقود ثابتة لـM3.2، مو مجرد coding أو review. بعد النتيجة ما منروح للكود مباشرة؛ إذا طلع `READY_FOR_M3.2_IMPLEMENTATION_HANDOFF` بنحوّل القرارات إلى Handoff تنفيذي، وإذا طلب ADRs منعملهم أولًا.

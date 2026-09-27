@@ -1,0 +1,6 @@
+interface:
+  display_name: "M3 Runtime Observability Engineer"
+  short_description: "Engineer runtime telemetry and evidence contracts"
+  default_prompt: "Use M3 Runtime Observability Engineer for MiningGuardian telemetry, timestamps, freshness, quality states, provenance, correlation, runtime diagnostics, evidence retention, and observability verification without introducing control authority."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,473 @@
+ممتاز. في v0.2 سأحوّل ADR-0006 من وثيقة فلسفة عامة إلى مواصفات قابلة للتحويل مباشرة إلى كود في M2.2.2.
+
+التطوير الأساسي سيكون في 4 محاور:
+
+Decision Mathematical Model
+Confidence & Uncertainty Engine
+Decision State Machine
+Data Contracts / Schemas
+
+سأكتبها كوثيقة هندسية.
+
+ADR-0006 v0.2
+MiningGuardian Decision Engine Specification
+
+Status: Draft v0.2
+Milestone: M2.2.2
+Purpose: Define the mathematical and architectural foundation of autonomous mining decisions.
+
+1. Decision Engine Objective
+
+The Decision Engine exists to answer one question:
+
+"Given the current mining reality, available evidence, possible actions, and uncertainty, is there a decision that improves expected mining outcome enough to justify the associated risk and cost?"
+
+The engine does not optimize a single variable.
+
+It optimizes:
+
+$$ Maximum\ Sustainable\ Effective\ Reward $$
+2. Core Optimization Function
+
+Every candidate decision receives a score.
+
+Decision Utility Score (DUS)
+$$ DUS = (B \times C) - (R + A + U) $$
+
+Where:
+
+B — Expected Benefit
+
+Expected improvement from the action.
+
+Components:
+
+$$ B = RewardGain + EfficiencyGain + StabilityGain $$
+
+Example:
+
+{
+ "reward_gain": 0.04,
+ "efficiency_gain": 0.02,
+ "stability_gain": 0.01
+}
+
+Total:
+
+Benefit = +7%
+C — Confidence Factor
+
+Represents how trustworthy the prediction is.
+
+Range:
+
+0.0 → 1.0
+
+Example:
+
+Confidence = 0.85
+
+Meaning:
+
+85% confidence that the expected improvement is real.
+
+R — Risk Penalty
+
+Represents possible negative outcomes.
+
+Components:
+
+$$ R = HardwareRisk + MiningRisk + EconomicRisk $$
+
+Example:
+
+{
+ "hardware":0.1,
+ "mining":0.05,
+ "economic":0.1
+}
+A — Action Cost
+
+Cost of performing the action.
+
+Includes:
+
+downtime
+restart cost
+lost shares
+warmup period
+connection disruption
+
+Example:
+
+Pool switch:
+
+Action Cost = 0.03
+U — Uncertainty Penalty
+
+Unknown information.
+
+Example:
+
+Low evidence:
+U = 0.4
+
+Strong evidence:
+U = 0.05
+3. Expected Reward Model
+
+MiningGuardian does not use hashrate alone.
+
+The economic model:
+
+$$ ERR = (Expected\ Reward) - (Energy Cost) - (Risk Cost) $$
+
+Where:
+
+Expected Reward
+$$ ExpectedReward = BlockReward \times ProbabilityContribution \times PoolEfficiency $$
+Probability Contribution
+
+Depends on:
+
+effective hashrate
+network difficulty
+algorithm conditions
+
+Conceptually:
+
+$$ P = \frac{MinerHashrate} {NetworkHashrate} $$
+Pool Efficiency
+
+Includes:
+
+latency
+stale shares
+rejected shares
+pool reliability
+4. Five-Minute Evaluation Model
+
+The engine evaluates decisions every five minutes.
+
+However:
+
+The five-minute cycle is not the only memory.
+
+The system uses:
+
+Current Window
+        |
+        |
+Short Trend
+(15 minutes)
+        |
+        |
+Operational Baseline
+(1 hour)
+        |
+        |
+Long-Term Learning
+(days)
+5. Confidence Engine
+
+No decision can exist without confidence.
+
+Confidence is calculated from:
+
+$$ Confidence = EvidenceQuality \times DataFreshness \times ModelAgreement $$
+Evidence Quality
+
+Factors:
+
+source reliability
+measurement accuracy
+signal consistency
+
+Example:
+
+NVML:
+
+High reliability
+
+User assumption:
+
+Low reliability
+Freshness
+
+Example:
+
+0-30 seconds:
+Fresh
+
+30-120 seconds:
+Recent
+
+>120 seconds:
+Stale
+Model Agreement
+
+If multiple models agree:
+
+Confidence increases.
+
+Example:
+
+Thermal issue:
+
+Evidence:
+
+Temperature ↑
+Power ↑
+Clock throttling ↑
+Hashrate ↓
+
+Confidence:
+
+High.
+
+6. Decision State Machine
+
+The engine follows:
+
+UNKNOWN
+
+    |
+    v
+
+OBSERVE
+
+    |
+    |
+ Enough Evidence?
+    |
+    v
+
+EVALUATE
+
+    |
+    |
+Calculate Utility Score
+
+    |
+    v
+
+DECIDE
+
+
+ /      |       \
+
+HOLD   TEST    ACTION
+
+
+7. Decision States
+UNKNOWN
+
+Insufficient information.
+
+Allowed:
+
+collect data
+wait
+OBSERVE
+
+A change was detected.
+
+Example:
+
+Hashrate decreased 3%
+
+No action yet.
+
+EVALUATE
+
+System generates:
+
+hypotheses
+candidate actions
+predicted outcomes
+HOLD
+
+Current state is acceptable.
+
+Example:
+
+No action improves expected reward.
+TEST
+
+Controlled experiment.
+
+Example:
+
+Try lower power profile.
+
+Requirements:
+
+reversible
+measurable
+safe
+ACTION
+
+Future execution layer only.
+
+M2.2.2 produces proposals.
+
+It does not execute.
+
+8. Candidate Action Schema
+
+Every possible action:
+
+{
+"id":"action_pool_change_01",
+
+"type":"POOL_CHANGE",
+
+"expected_gain":0.04,
+
+"confidence":0.82,
+
+"risk":0.15,
+
+"cost":0.03,
+
+"reversible":true,
+
+"requires_validation":true
+}
+9. Decision Object Schema
+
+The output of the Decision Engine:
+
+{
+"decision_id":"dec_001",
+
+"state":"EVALUATE",
+
+"objective":
+"maximize effective reward",
+
+"evidence":[
+"hashrate_drop",
+"latency_increase"
+],
+
+"hypotheses":[
+"pool_degradation"
+],
+
+"candidate_actions":[
+"switch_pool",
+"remain_current"
+],
+
+"selected_option":
+"remain_current",
+
+"confidence":0.78,
+
+"reason":
+
+"Expected improvement does not exceed switching cost",
+
+"execution":
+
+"NOT_EXECUTED"
+}
+10. Safety Constraints
+
+The Decision Engine MUST reject:
+
+Low confidence actions
+
+Example:
+
+Expected gain 5%
+Confidence 0.3
+
+Result:
+
+NO ACTION
+
+High disruption actions
+
+Example:
+
+Restart miner
+
+Expected gain:
+1%
+
+Rejected.
+
+Hardware risk actions
+
+Example:
+
+Higher power
+
+Temperature margin insufficient
+
+Rejected.
+
+11. Learning Loop
+
+Every decision creates:
+
+Decision
+
+↓
+
+Observed Result
+
+↓
+
+Comparison:
+
+Prediction vs Reality
+
+↓
+
+Model Update
+
+Example:
+
+Prediction:
+
+Pool change:
++5%
+
+Reality:
+
++1%
+
+Learning:
+
+Reduce confidence for similar future predictions.
+
+12. M2.2.2 Implementation Boundary
+
+M2.2.2 SHALL implement:
+
+✅ Decision models
+✅ Scoring engine
+✅ Confidence calculation
+✅ Candidate ranking
+✅ Decision journal integration
+✅ Simulation only
+
+M2.2.2 SHALL NOT implement:
+
+❌ Miner control
+❌ Pool switching
+❌ GPU modification
+❌ Automatic execution
+
+Final Principle
+
+MiningGuardian does not ask:
+
+"What action gives the highest number?"
+
+It asks:
+
+"What decision maximizes expected sustainable reward while respecting uncertainty, hardware limits, and operational continuity?"

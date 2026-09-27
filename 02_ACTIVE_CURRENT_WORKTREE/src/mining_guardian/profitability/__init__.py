@@ -1,0 +1,1 @@
+"""Profitability module (M2+)."""

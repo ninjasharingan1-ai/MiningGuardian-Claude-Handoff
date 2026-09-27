@@ -1,0 +1,600 @@
+ADR-0006 v0.7
+MiningGuardian Decision Engine Specification
+Production Implementation Blueprint
+
+Status: Draft v0.7
+Milestone: M2.2.2
+Purpose: Define the exact software architecture, interfaces, data contracts, and implementation sequence of the Decision Engine.
+
+73. Implementation Philosophy
+
+M2.2.2 implements the cognitive decision layer only.
+
+It transforms:
+
+Validated Context
+
+into:
+
+Ranked Decision Proposal
+
+It does NOT:
+
+execute commands
+control hardware
+modify miner configuration
+interact with operating system processes
+74. Final M2.2.2 Software Architecture
+
+Target structure:
+
+src/mining_guardian/
+
+    agent/
+
+        decision/
+
+            __init__.py
+
+            engine.py
+            models.py
+            scoring.py
+            ranking.py
+            confidence.py
+            lifecycle.py
+            candidates.py
+            predictors.py
+            policies.py
+
+        cognition/
+
+        records/
+
+        memory/
+
+    storage/
+
+        decision_repository.py
+
+75. Core Modules
+75.1 decision/models.py
+
+Purpose:
+
+Define all Decision Engine data contracts.
+
+CandidateAction
+
+Represents a possible choice.
+
+class CandidateAction:
+    id: str
+
+    action_type: ActionType
+
+    expected_gain: float
+
+    confidence: float
+
+    risk_score: float
+
+    transition_cost: float
+
+    reversible: bool
+
+    requires_execution: bool
+DecisionScore
+
+Stores ranking calculation.
+
+class DecisionScore:
+
+    benefit: float
+
+    confidence_adjusted_value: float
+
+    risk_penalty: float
+
+    cost_penalty: float
+
+    uncertainty_penalty: float
+
+    final_score: float
+DecisionResult
+
+Final engine output.
+
+class DecisionResult:
+
+    decision_id: str
+
+    state: DecisionState
+
+    selected_action: CandidateAction
+
+    alternatives: list[CandidateAction]
+
+    confidence: float
+
+    explanation: str
+76. Decision Engine Interface
+
+File:
+
+decision/engine.py
+
+Main interface:
+
+class DecisionEngine:
+
+    def evaluate(
+        self,
+        context: AgentWorkingMemory
+    ) -> DecisionResult:
+        ...
+
+Internal flow:
+
+AgentWorkingMemory
+
+        ↓
+
+Evidence Validation
+
+        ↓
+
+Candidate Generation
+
+        ↓
+
+Prediction
+
+        ↓
+
+Risk Evaluation
+
+        ↓
+
+Ranking
+
+        ↓
+
+Decision Result
+77. Candidate Generation Module
+
+File:
+
+decision/candidates.py
+
+Purpose:
+
+Generate possible actions.
+
+Interface:
+
+class CandidateGenerator:
+
+    def generate(
+        context
+    ) -> list[CandidateAction]:
+        ...
+
+Initial candidate sources:
+
+Performance degradation
+
+Example:
+
+Hashrate below baseline
+
+Generate:
+
+Investigate cause
+Efficiency opportunity
+
+Example:
+
+TH/W declining
+
+Generate:
+
+Evaluate efficiency profile
+Network opportunity
+
+Example:
+
+Latency increased
+
+Generate:
+
+Evaluate pool condition
+78. Prediction Module
+
+File:
+
+decision/predictors.py
+
+Purpose:
+
+Estimate future outcome.
+
+Interface:
+
+class OutcomePredictor:
+
+    def predict(
+        state,
+        action
+    ):
+        ...
+
+Output:
+
+PredictionResult
+
+Contains:
+
+expected_reward_change
+
+expected_hashrate_change
+
+expected_power_change
+
+confidence
+79. Scoring Module
+
+File:
+
+decision/scoring.py
+
+Implements:
+
+$$ Score = (B \times C) - (R+A+U) $$
+
+Interface:
+
+class DecisionScorer:
+
+    def score(
+        candidate,
+        prediction
+    ):
+        ...
+80. Ranking Module
+
+File:
+
+decision/ranking.py
+
+Purpose:
+
+Order all available choices.
+
+Interface:
+
+class DecisionRanker:
+
+    def rank(
+        candidates
+    ):
+        ...
+
+Rules:
+
+Higher utility wins
+If scores are close:
+
+Prefer:
+
+Lower Risk
+
+Higher Confidence
+
+Lower Cost
+
+More Reversible
+81. Confidence Engine
+
+File:
+
+decision/confidence.py
+
+Purpose:
+
+Calculate decision trust level.
+
+Formula:
+
+$$ Confidence = EvidenceQuality \times Freshness \times PredictionReliability $$
+
+Output:
+
+ConfidenceScore
+82. Decision Lifecycle State Machine
+
+File:
+
+decision/lifecycle.py
+
+States:
+
+class DecisionState:
+
+    DETECTED
+
+    ANALYZING
+
+    PROPOSED
+
+    VALIDATING
+
+    APPROVED
+
+    REJECTED
+
+    OBSERVED
+
+    LEARNED
+
+Transitions:
+
+DETECTED
+   |
+   v
+ANALYZING
+   |
+   v
+PROPOSED
+   |
+   v
+VALIDATING
+
+   |
+   +---- REJECTED
+
+   |
+   v
+
+APPROVED
+
+   |
+   v
+
+OBSERVED
+
+   |
+   v
+
+LEARNED
+83. Decision Policies
+
+File:
+
+decision/policies.py
+
+Purpose:
+
+Store immutable safety rules.
+
+Example:
+
+class DecisionPolicy:
+
+    minimum_confidence = 0.75
+
+    minimum_gain = 0.03
+
+    max_risk = 0.25
+
+Rules:
+
+No decision passes if:
+
+Confidence < threshold
+
+OR
+
+Risk > allowed
+
+OR
+
+Expected gain < transition cost
+84. Persistence Layer
+
+File:
+
+storage/decision_repository.py
+
+Stores:
+
+Decision
+decision_id
+
+timestamp
+
+state
+
+selected_action
+
+confidence
+
+score
+
+explanation
+Candidate evaluations
+candidate_id
+
+decision_id
+
+score
+
+ranking_position
+Outcomes
+prediction
+
+actual_result
+
+error
+
+lesson
+85. Database Migration
+
+M2.2.2 adds:
+
+decision_candidates
+
+decision_scores
+
+decision_outcomes
+
+Existing tables:
+
+UNCHANGED
+
+86. CLI Additions
+
+M2.2.2 should add read-only commands:
+
+Inspect decision context
+mining-guardian decision-context
+
+Shows:
+
+current evidence
+hypotheses
+available candidates
+Run simulation
+mining-guardian decision-simulate
+
+Output:
+
+Example:
+
+Candidate ranking:
+
+1. HOLD
+Score: 0.82
+
+2. Pool evaluation
+Score: 0.65
+
+3. Power adjustment
+Score: 0.41
+Explain decision
+mining-guardian decision-explain ID
+87. Testing Requirements
+
+M2.2.2 MUST include:
+
+Unit Tests
+Candidate generation
+
+Test:
+
+valid evidence creates candidates
+missing evidence creates none
+Scoring
+
+Test:
+
+higher reward improves score
+higher risk reduces score
+Ranking
+
+Test:
+
+safer option wins when scores are close
+Confidence
+
+Test:
+
+stale evidence lowers confidence
+Lifecycle
+
+Test:
+
+invalid transitions rejected
+Integration Tests
+
+Test:
+
+WorldState
+
+↓
+
+Evidence
+
+↓
+
+Decision Engine
+
+↓
+
+Decision Record
+88. Simulation First Rule
+
+Before any execution layer:
+
+All decisions must run in:
+
+SIMULATION MODE
+
+The system must prove:
+
+prediction accuracy
+decision quality
+false positive rate
+unnecessary intervention rate
+89. M2.2.2 Completion Criteria
+
+M2.2.2 is complete when:
+
+✅ Decision models implemented
+✅ Candidate generation works
+✅ Ranking works
+✅ Confidence works
+✅ Persistence works
+✅ Simulation works
+✅ Tests pass
+
+NOT required:
+
+❌ Real execution
+❌ GPU control
+❌ Pool switching
+❌ Miner restart
+
+90. Final Architecture Statement
+
+MiningGuardian Decision Engine is:
+
+A risk-aware, evidence-driven decision system that evaluates possible mining improvements, ranks alternatives, explains choices, and learns from outcomes before any future execution authority is granted.
+
+بعد v0.7
+
+الآن أصبحت الوثيقة جاهزة كـ Codex Implementation Specification.
+
+الانتقال الطبيعي بعد هذه النسخة:
+
+M2.2.2 Execution Prompt Package
+
+أي نحول ADR-0006 v0.7 إلى Prompt واحد لـCodex يحتوي:
+
+الهدف
+القيود
+الملفات المطلوبة
+ترتيب التنفيذ
+الاختبارات المطلوبة
+ممنوعات التنفيذ
+
+وهذا سيكون أول Prompt فعلي لبناء Decision Engine داخل المشروع.
+
+تمام , اجمع ADR-0006  - v0.1 - v0.2 - v0.3 - v0.4 - v0.5 - v0.6 - v0.7 في ملف وثيقة واحد كامل و خرجه ك implementation specification للانتقال الى M2.2.2 Execution Prompt Package  
+
+ممتاز. سأجمعها لك في وثيقة واحدة موحدة، لكن سأجري عليها عملية دمج هندسية وليس مجرد نسخ ولصق.
+
+الهدف سيكون إخراج:
+
+ADR-0006
+MiningGuardian Decision Engine Specification
+M2.2.2 Implementation Specification

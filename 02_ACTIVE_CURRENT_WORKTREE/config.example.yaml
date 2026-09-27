@@ -1,0 +1,19 @@
+# Illustrative configuration only.
+# M0/M1 loads environment variables / .env via pydantic-settings; YAML loading is not implemented.
+miner:
+  api_host: "127.0.0.1"
+  api_port: 21550
+  api_path: "/"
+  api_timeout_seconds: 5
+
+gpu:
+  index: 0
+
+observer:
+  interval_seconds: 10
+
+database:
+  path: "./mining_guardian.db"
+
+# Metadata only in M1.
+payout_coin: null

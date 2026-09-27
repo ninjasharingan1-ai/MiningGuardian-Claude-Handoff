@@ -1,0 +1,72 @@
+{
+  "rig_name": "MiningGuardian",
+  "miner_version": "3.6.4",
+  "mining_time": 283,
+  "total_cpu_workers": 0,
+  "total_gpu_workers": 1,
+  "total_workers": 1,
+  "gpu_devices": [
+    {
+      "id": 1,
+      "topology_id": "0000:01:00.0",
+      "bus_id": 1,
+      "device": "gpu1",
+      "vendor": "nvidia",
+      "model": "nvidia_geforce_rtx_4050_laptop_gpu",
+      "fan_speed_percent": 0,
+      "core_clock": 1650,
+      "memory_clock": 5871,
+      "temperature": 61,
+      "asic_power": 35,
+      "off_temperature": 78
+    }
+  ],
+  "algorithms": [
+    {
+      "id": 0,
+      "name": "pearlhash",
+      "pool": {
+        "pool": "pool.example.invalid:3333",
+        "time_connected": "2026-09-16 00:37:58",
+        "uptime": 278,
+        "difficulty": 2097152.0,
+        "last_job_received": 21,
+        "latency": 0
+      },
+      "shares": {
+        "total": 0,
+        "accepted": 0,
+        "rejected": 0,
+        "avg_find_time": 0
+      },
+      "hashrate": {
+        "1min": 32459610144862.57,
+        "1hr": 32394760917062.8,
+        "6hr": 0.0,
+        "12hr": 0.0,
+        "cpu": {
+          "total": 0.0
+        },
+        "gpu": {
+          "gpu1": 32504670777591.94,
+          "total": 32504670777591.94
+        }
+      },
+      "gpu_accepted_shares": {
+        "gpu1": 0
+      },
+      "gpu_rejected_shares": {
+        "gpu1": 0
+      },
+      "gpu_compute_errors": {
+        "gpu1": 0
+      },
+      "gpu_efficiency": {
+        "gpu1": 928704879359.77
+      },
+      "gpu_autotune_results": {
+        "gpu1": "0"
+      }
+    }
+  ]
+}

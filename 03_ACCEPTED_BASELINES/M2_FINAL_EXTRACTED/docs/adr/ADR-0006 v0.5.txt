@@ -1,0 +1,541 @@
+ADR-0006 v0.5
+MiningGuardian Decision Engine Specification
+Multi-Agent Cognitive Architecture & Intelligence Boundary
+
+Status: Draft v0.5
+Milestone: M2.2.2
+Purpose: Define the final cognitive architecture, intelligence boundaries, and transition path from reasoning to controlled execution.
+
+41. Architectural Principle
+
+MiningGuardian SHALL NOT be implemented as a single monolithic AI agent.
+
+A single model responsible for:
+
+hardware analysis
+blockchain analysis
+economic decisions
+execution
+
+creates several risks:
+
+reasoning conflicts
+poor explainability
+unsafe actions
+difficult debugging
+
+Therefore MiningGuardian adopts:
+
+Specialized Cognitive Modules
+
+Each module owns a specific intelligence domain.
+
+42. Multi-Agent Cognitive Architecture
+
+The system is divided into specialized intelligence layers:
+
+                    MiningGuardian Core
+
+                           |
+
+        +------------------+------------------+
+
+        |                  |                  |
+
+Hardware Intelligence   Mining Intelligence   Economic Intelligence
+
+        |                  |                  |
+
+        +------------------+------------------+
+
+                           |
+
+                 Decision Intelligence Layer
+
+                           |
+
+                 Execution Authorization Layer
+43. Hardware Intelligence Agent
+Purpose
+
+Understand physical machine reality.
+
+Responsibilities:
+
+GPU health
+thermal behaviour
+power efficiency
+clock stability
+hardware limitations
+
+Inputs:
+
+NVML
+Telemetry
+Historical GPU behaviour
+
+Outputs:
+
+Example:
+
+{
+"state":"thermal_margin_reduced",
+
+"confidence":0.91,
+
+"risk":
+
+"medium"
+}
+It does NOT:
+change clocks
+change voltage
+control fans
+
+It only provides intelligence.
+
+44. Mining Intelligence Agent
+Purpose
+
+Understand mining process performance.
+
+Responsibilities:
+
+effective hashrate
+accepted shares
+rejected shares
+stale shares
+miner behaviour
+algorithm performance
+
+Inputs:
+
+SRBMiner API
+Mining logs
+Pool statistics
+
+Outputs:
+
+{
+"performance_state":
+
+"below_expected",
+
+"cause_candidates":[
+
+"pool_latency",
+
+"share_efficiency"
+
+]
+}
+45. Network & Blockchain Intelligence Agent
+Purpose
+
+Understand external mining environment.
+
+Responsibilities:
+
+network difficulty
+block reward
+block time
+algorithm conditions
+pool behaviour
+reward probability
+
+Outputs:
+
+{
+"network_condition":
+
+"favorable",
+
+"reward_opportunity":
+
+0.07,
+
+"confidence":
+
+0.76
+}
+46. Economic Intelligence Agent
+Purpose
+
+Convert technical conditions into economic value.
+
+The question:
+
+"Is this technically better, or actually more profitable?"
+
+Evaluates:
+
+reward per block
+block time
+difficulty
+energy cost
+opportunity cost
+
+Output:
+
+{
+"expected_reward_change":
+
+0.04,
+
+"net_value":
+
+0.02
+}
+47. Decision Intelligence Layer
+
+This is the core of MiningGuardian.
+
+It receives:
+
+Hardware State
+
++
+
+Mining State
+
++
+
+Network State
+
++
+
+Economic State
+
+
+Then performs:
+
+Evidence Review
+
+↓
+
+Hypothesis Evaluation
+
+↓
+
+Candidate Ranking
+
+↓
+
+Decision Selection
+48. LLM Integration Boundary
+
+Important architectural decision:
+
+LLM is NOT the Decision Engine.
+
+The LLM is a reasoning assistant.
+
+The LLM SHALL NOT directly receive:
+
+raw telemetry streams
+GPU controls
+miner commands
+wallet information
+execution permissions
+
+The LLM receives:
+
+Structured Cognitive Context:
+
+{
+"verified_evidence": [],
+
+"active_hypotheses": [],
+
+"candidate_actions": [],
+
+"risk_constraints": [],
+
+"historical_lessons": []
+}
+49. LLM Responsibilities
+
+The LLM may help with:
+
+Pattern interpretation
+
+Example:
+
+"These three signals historically indicate pool degradation."
+
+Hypothesis generation
+
+Example:
+
+Possible causes:
+
+Network degradation
+Pool instability
+Miner issue
+Explanation generation
+
+Convert:
+
+Decision Score = 0.72
+
+into:
+
+Human explanation.
+
+50. LLM Limitations
+
+The LLM SHALL NOT:
+
+override safety rules
+invent missing evidence
+execute actions
+modify hardware
+bypass confidence thresholds
+
+The LLM proposes.
+
+The Decision Engine validates.
+
+51. Decision Authority Model
+
+Decision ownership hierarchy:
+
+Safety Layer
+
+      ↓
+
+Evidence Validation
+
+      ↓
+
+Decision Engine
+
+      ↓
+
+LLM Reasoning Support
+
+      ↓
+
+Execution Layer
+
+Important rule:
+
+Intelligence does not equal authority.
+
+A smarter model does not automatically receive more permissions.
+
+52. Decision Confidence Gate
+
+Every decision must pass:
+
+Evidence Quality
+
++
+
+Prediction Confidence
+
++
+
+Risk Evaluation
+
+=
+
+Decision Confidence
+
+Example:
+
+{
+"decision":
+
+"switch_pool",
+
+"confidence":
+
+0.82,
+
+"allowed":
+
+true
+}
+
+Another:
+
+{
+"decision":
+
+"increase_power",
+
+"confidence":
+
+0.41,
+
+"allowed":
+
+false
+}
+53. Execution Permission Framework
+
+Future execution requires three approvals:
+
+1. Technical Approval
+
+Is it technically valid?
+
+Example:
+
+GPU has thermal margin.
+
+2. Economic Approval
+
+Is expected reward improvement meaningful?
+
+Example:
+
+Gain > transition cost.
+
+3. Safety Approval
+
+Is risk acceptable?
+
+Example:
+
+No hardware danger.
+
+Only:
+
+Technical YES
+
+AND
+
+Economic YES
+
+AND
+
+Safety YES
+
+
+creates:
+
+EXECUTION_ALLOWED
+54. Execution Levels
+
+Future system actions are classified:
+
+Level 0
+
+Observation only
+
+Current M2.2.2
+
+READ ONLY
+Level 1
+
+Recommendation
+
+Example:
+
+"Consider reducing power."
+
+Human approval required.
+
+Level 2
+
+Controlled Experiment
+
+Example:
+
+Test profile for limited duration.
+
+Level 3
+
+Autonomous Optimization
+
+Future milestone.
+
+Requires:
+
+proven models
+safety history
+confidence
+55. Complete Cognitive Architecture
+
+Final architecture:
+
+                REAL WORLD
+
+                    ↓
+
+             Data Collection Layer
+
+                    ↓
+
+             Evidence Foundation
+
+                    ↓
+
+        Specialized Intelligence Agents
+
+     /             |              \
+
+Hardware      Mining        Economic
+Agent         Agent          Agent
+
+     \             |              /
+
+              Decision Engine
+
+                    ↓
+
+          Candidate Evaluation
+
+                    ↓
+
+             Decision Ranking
+
+                    ↓
+
+            Decision Journal
+
+                    ↓
+
+          Learning Memory
+
+
+                    ↓
+
+          Future Control Layer
+56. M2.2.2 Implementation Scope
+Build:
+
+✅ Decision models
+✅ Candidate generation
+✅ Ranking engine
+✅ Confidence engine
+✅ Simulation framework
+✅ Decision explanations
+✅ Learning records
+
+Do NOT build:
+
+❌ LLM integration
+❌ Real autonomous control
+❌ Pool switching
+❌ GPU modification
+❌ Miner restart automation
+
+57. Final MiningGuardian Philosophy
+
+MiningGuardian is not an AI that controls a miner.
+
+It is an intelligence system that continuously answers:
+
+"Given everything we know, what decision has the highest probability of increasing sustainable mining reward without creating unacceptable risk?"
+
+The system earns authority through:
+
+evidence
+prediction accuracy
+historical validation
+controlled learning
+
+Not through model complexity.

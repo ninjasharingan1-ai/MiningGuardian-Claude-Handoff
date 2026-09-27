@@ -1,0 +1,6 @@
+interface:
+  display_name: "M3 Cognitive Systems Architect"
+  short_description: "Design M3 architecture and semantic contracts"
+  default_prompt: "Use M3 Cognitive Systems Architect to review MiningGuardian architecture, ownership, semantic boundaries, interfaces, invariants, and ADR implications against frozen project authority before implementation."
+policy:
+  allow_implicit_invocation: true

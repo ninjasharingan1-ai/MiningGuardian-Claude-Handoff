@@ -1,0 +1,453 @@
+ADR-0006 v0.3
+MiningGuardian Decision Engine Specification
+Decision Ranking & Selection Architecture
+
+Status: Draft v0.3
+Milestone: M2.2.2
+Purpose: Define how MiningGuardian evaluates, ranks, and selects decisions under uncertainty.
+
+13. Decision Ranking Engine
+13.1 Purpose
+
+The Decision Ranking Engine is responsible for answering:
+
+"Given multiple possible actions, which option provides the highest expected value while maintaining safety and continuity?"
+
+The engine does not search for:
+
+Highest performance
+
+It searches for:
+
+Highest risk-adjusted expected outcome
+14. Candidate Decision Ranking Model
+
+Every candidate action receives a normalized score:
+
+$$ DecisionScore = (B \times C) - (R + A + U) $$
+
+Where:
+
+Benefit Score (B)
+
+Represents expected positive impact.
+
+Components:
+
+$$ B = W_r R_g + W_e E_g + W_s S_g $$
+
+Where:
+
+Symbol	Meaning
+Rg	Reward gain
+Eg	Efficiency gain
+Sg	Stability gain
+W	Importance weight
+
+Example:
+
+Candidate:
+
+Pool Change
+
+Expected:
+
+Reward:
++5%
+
+Efficiency:
++1%
+
+Stability:
+-2%
+
+The system does not see +5% only.
+
+It calculates the combined impact.
+
+15. Confidence Weighting
+
+A decision with high theoretical gain but low confidence is downgraded.
+
+Example:
+
+Decision A
+Expected Gain:
++10%
+
+Confidence:
+0.3
+
+Effective value:
+
+10 × 0.3 = 3
+Decision B
+Expected Gain:
++5%
+
+Confidence:
+0.9
+
+Effective value:
+
+5 × 0.9 = 4.5
+
+Decision B becomes preferable.
+
+16. Risk Adjustment Model
+
+Risk is not a single value.
+
+It is divided into:
+
+Hardware Risk
+
+Factors:
+
+temperature increase
+power increase
+thermal margin reduction
+GPU error probability
+
+Example:
+
+Power +10W
+Temperature +8C
+
+Hardware Risk:
+High
+Mining Risk
+
+Factors:
+
+rejected shares
+stale shares
+connection instability
+miner interruption
+Economic Risk
+
+Factors:
+
+uncertain reward
+volatile conditions
+insufficient historical evidence
+17. Decision Ranking Example
+
+Current state:
+
+PearlPow
+40 TH/s
+50W
+71C
+
+Available options:
+
+Option A
+
+Increase power:
+
+Expected:
++5% hashrate
+
+Cost:
++8W
+
+Risk:
+Medium
+Option B
+
+Reduce power:
+
+Expected:
+-2% hashrate
+
+Cost:
+-8W
+
+Risk:
+Low
+Option C
+
+No change:
+
+Expected:
+0%
+
+Risk:
+None
+
+The engine evaluates:
+
+A:
+Benefit - Risk = Positive/Negative
+
+B:
+Benefit - Efficiency Gain
+
+C:
+Baseline preservation
+
+The winner is not automatically A.
+
+18. No-Action Decision as First-Class Option
+
+Important architectural decision:
+
+NO_ACTION is always included as a candidate.
+
+The engine always compares:
+
+Current State
+
+against:
+
+Possible Changes
+
+Example:
+
+{
+"candidate":"NO_ACTION",
+"expected_gain":0,
+"risk":0,
+"cost":0
+}
+
+This prevents unnecessary optimization loops.
+
+19. Decision Thresholds
+
+A candidate action requires:
+
+Minimum Utility Gain
+
+Example:
+
+Expected Score Improvement > 5%
+
+Otherwise:
+
+HOLD
+
+Threshold depends on action type.
+
+Low Risk Action
+
+Example:
+
+Change monitoring parameter.
+
+Threshold:
+
+Small improvement acceptable
+High Risk Action
+
+Example:
+
+Miner restart.
+
+Threshold:
+
+Large improvement required
+20. Action Cost Model
+
+Every action has a transition cost.
+
+Formula:
+
+$$ NetDecisionValue = DecisionScore - TransitionCost $$
+
+Transition cost includes:
+
+Downtime
+
+Lost shares
+
+Connection recovery
+
+Warmup
+
+Probability of failure
+
+Example:
+
+Pool switch:
+
+Expected improvement:
+
++3%
+
+Cost:
+
+2 minutes downtime
+
+Result:
+
+Reject
+
+because the gain cannot recover the loss.
+
+21. Decision Tie Breaking
+
+Sometimes multiple options have similar scores.
+
+Example:
+
+Option A:
+Score 0.81
+
+Option B:
+Score 0.79
+
+The system follows:
+
+Lower risk wins
+Higher confidence wins
+Lower intervention cost wins
+More reversible option wins
+
+Priority:
+
+Safety
+↓
+Confidence
+↓
+Continuity
+↓
+Reward
+↓
+Efficiency
+22. Decision Explanation Requirement
+
+Every decision must be explainable.
+
+The engine must produce:
+
+{
+"decision":"HOLD",
+
+"reason":
+"Alternative actions do not exceed current expected reward",
+
+"evidence":[
+"stable_hashrate",
+"acceptable_temperature"
+],
+
+"confidence":0.91,
+
+"rejected_options":[
+{
+"option":"increase_power",
+"reason":"risk exceeds expected gain"
+}
+]
+}
+23. Decision Memory Integration
+
+Every ranked decision creates a learning record:
+
+Decision
+
+↓
+
+Prediction
+
+↓
+
+Actual Result
+
+↓
+
+Prediction Error
+
+↓
+
+Future Adjustment
+
+Example:
+
+Prediction:
+
+Pool switch:
++5%
+
+Reality:
+
++1%
+
+The model adjusts future confidence.
+
+24. Decision Engine Output Contract
+
+M2.2.2 SHALL output:
+
+{
+"state":"DECIDED",
+
+"selected_action":"HOLD",
+
+"score":0.82,
+
+"confidence":0.9,
+
+"evidence_ids":[
+"ev_001",
+"ev_002"
+],
+
+"alternatives_ranked":[
+{
+"name":"pool_switch",
+"score":0.41
+},
+{
+"name":"power_adjustment",
+"score":0.32
+}
+],
+
+"execution_allowed":false
+}
+25. M2.2.2 Final Architecture After v0.3
+
+The complete cognitive flow becomes:
+
+WORLD STATE
+
+      ↓
+
+EVIDENCE ENGINE
+
+      ↓
+
+HYPOTHESIS ENGINE
+
+      ↓
+
+CANDIDATE GENERATION
+
+      ↓
+
+DECISION SCORING
+
+      ↓
+
+DECISION RANKING
+
+      ↓
+
+DECISION RECORD
+
+      ↓
+
+(Future)
+CONTROL LAYER
+26. Core Philosophy v0.3
+
+MiningGuardian does not ask:
+
+"What can I change?"
+
+It asks:
+
+"Among all possible choices, including doing nothing, which choice has the highest probability of improving sustainable mining reward?"

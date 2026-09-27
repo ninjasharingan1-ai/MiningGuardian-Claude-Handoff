@@ -1,0 +1,500 @@
+ADR-0006 v0.4
+MiningGuardian Decision Engine Specification
+Candidate Generation, Prediction & Experiment Architecture
+
+Status: Draft v0.4
+Milestone: M2.2.2
+Purpose: Define how MiningGuardian discovers optimization opportunities, predicts outcomes, and validates decisions.
+
+27. Candidate Generation Engine
+27.1 Purpose
+
+The Decision Engine SHALL NOT randomly search for improvements.
+
+It SHALL generate candidate decisions from:
+
+Observed deviations
+Historical patterns
+Mathematical models
+Known optimization spaces
+
+The system moves from:
+
+"What can I change?"
+
+to:
+
+"What evidence indicates that a change may improve expected reward?"
+28. Candidate Generation Sources
+
+Candidate actions may originate from four sources.
+
+Source 1 — Performance Deviation Detection
+
+The system compares current state against expected baseline.
+
+Example:
+
+Baseline:
+
+Expected:
+
+40 TH/s
+50W
+70°C
+
+Current:
+
+38 TH/s
+50W
+71°C
+
+Detected:
+
+Performance degradation
+
+Possible candidates:
+
+Investigate thermal behavior
+
+Investigate pool efficiency
+
+Investigate miner state
+Source 2 — Efficiency Opportunity Detection
+
+The system searches for inefficient operating points.
+
+Example:
+
+Historical memory:
+
+Profile A
+
+40 TH/s
+50W
+
+
+Profile B
+
+39.5 TH/s
+42W
+
+The engine may generate:
+
+{
+"type":"EFFICIENCY_OPTIMIZATION",
+
+"candidate":
+"evaluate lower power profile"
+}
+Source 3 — Network Opportunity Detection
+
+The system evaluates mining environment.
+
+Signals:
+
+Pool latency
+Stale shares
+Rejected shares
+Job frequency
+Reward efficiency
+
+Example:
+
+Current:
+
+Pool A
+
+Latency:
+180ms
+
+Rejected:
+2%
+
+Alternative:
+
+Pool B
+
+Latency:
+40ms
+
+Rejected:
+0.2%
+
+Candidate:
+
+Evaluate pool change
+Source 4 — Historical Learning
+
+Past successful decisions become future candidates.
+
+Example:
+
+Memory:
+
+When:
+
+Temperature >75C
+
+and
+
+Hashrate decreases
+
+Previous solution:
+
+Reduce power target
+
+Result:
+
++3% effective reward
+
+Future:
+
+The system can propose the same hypothesis.
+
+29. Candidate Generation Rules
+
+Candidate generation SHALL obey:
+
+No Evidence = No Candidate
+
+The system cannot generate:
+
+Increase power
+
+without evidence that:
+
+power is limiting performance
+thermal margin exists
+expected reward improves
+No Historical Support = Low Priority
+
+New ideas are allowed but receive lower confidence.
+
+Dangerous Actions Require Higher Evidence
+
+Example:
+
+Changing power:
+
+Evidence threshold:
+
+Medium
+
+Changing voltage:
+
+Evidence threshold:
+
+High
+
+30. Predictive Evaluation Layer
+
+Before ranking an action, MiningGuardian predicts:
+
+"What is likely to happen if this decision is applied?"
+
+Prediction Model
+
+Concept:
+
+$$ FutureState = f(CurrentState, Action, HistoricalExperience) $$
+
+Inputs:
+
+Current GPU state
+
+Current mining state
+
+Network state
+
+Historical outcomes
+
+Candidate action
+
+Output:
+
+{
+"predicted_hashrate":42,
+
+"predicted_power":48,
+
+"predicted_reward":1.05,
+
+"confidence":0.76
+}
+31. Prediction Horizons
+
+The system predicts multiple horizons:
+
+Immediate
+
+Seconds to minutes:
+
+Thermal response
+Connection impact
+Short term
+
+5-30 minutes:
+
+Reward improvement
+Share behaviour
+Long term
+
+Hours/days:
+
+Stability
+Hardware impact
+Efficiency trend
+32. Mathematical Modelling Layer
+
+The engine uses multiple models rather than one prediction.
+
+Model A — Efficiency Model
+$$ Efficiency = \frac{EffectiveHashrate}{Power} $$
+
+Used for:
+
+Power decisions
+Clock evaluation
+Model B — Reward Model
+$$ ExpectedReward = f( EffectiveHashrate, BlockReward, Difficulty, PoolEfficiency ) $$
+Model C — Stability Model
+
+Measures:
+
+Variance
+
+Failures
+
+Thermal behaviour
+
+Reject rate
+Model D — Confidence Model
+
+Measures:
+
+Prediction accuracy history
+
+Evidence quality
+
+Data availability
+33. Controlled Experiment Framework
+
+MiningGuardian SHALL learn through controlled experiments.
+
+Not:
+
+Change everything
+
+But:
+
+Hypothesis
+
+↓
+
+Single Variable Change
+
+↓
+
+Measure Result
+
+↓
+
+Accept / Reject
+34. Experiment Object
+
+Example:
+
+{
+"id":"exp_001",
+
+"hypothesis":
+
+"Lower power improves TH/W without reducing reward",
+
+"baseline":
+
+{
+"hashrate":40,
+"power":50
+},
+
+"change":
+
+{
+"power_limit":45
+},
+
+"metrics":
+
+[
+"effective_hashrate",
+"reward_rate",
+"temperature"
+],
+
+"duration":
+
+"30 minutes"
+}
+35. Experiment Safety Rules
+
+Experiments MUST be:
+
+Reversible
+
+The system must know how to return.
+
+Isolated
+
+One variable only.
+
+Measurable
+
+Clear success criteria.
+
+Bounded
+
+Maximum duration.
+
+36. Prediction vs Reality Learning
+
+After every experiment:
+
+Compare:
+
+Prediction:
+
+Expected:
+
++5% reward
+
+Reality:
+
+Actual:
+
++1.5%
+
+Calculate:
+
+$$ PredictionError = |Expected-Actual| $$
+
+Store:
+
+{
+"prediction_error":0.035,
+
+"future_confidence_adjustment":-0.1
+}
+37. Decision Learning Loop
+
+The complete loop becomes:
+
+Observe
+
+↓
+
+Understand
+
+↓
+
+Generate Candidates
+
+↓
+
+Predict Outcomes
+
+↓
+
+Rank Decisions
+
+↓
+
+Choose
+
+↓
+
+Experiment
+
+↓
+
+Measure Result
+
+↓
+
+Update Knowledge
+38. Updated M2.2.2 Architecture
+
+After v0.4:
+
+                    WORLD
+
+                      ↓
+
+             Evidence Foundation
+
+                      ↓
+
+            Cognitive Understanding
+
+                      ↓
+
+          Candidate Generation Engine
+
+                      ↓
+
+          Predictive Evaluation Layer
+
+                      ↓
+
+          Decision Ranking Engine
+
+                      ↓
+
+             Decision Record
+
+                      ↓
+
+          Experiment Framework
+
+                      ↓
+
+              Learning Memory
+39. Implementation Boundary Update
+
+M2.2.2 SHALL implement:
+
+✅ Candidate models
+✅ Decision scoring
+✅ Candidate ranking
+✅ Prediction interfaces
+✅ Experiment records
+✅ Learning records
+✅ Simulation mode
+
+M2.2.2 SHALL NOT implement:
+
+❌ Real GPU modification
+❌ Real pool switching
+❌ Miner restart
+❌ Automatic execution
+
+40. Core Principle v0.4
+
+MiningGuardian does not discover optimization by guessing.
+
+It discovers opportunities through:
+
+Evidence
+
++
+
+Prediction
+
++
+
+Controlled Validation
+
+The agent behaves like an experienced mining engineer:
+
+"I do not change the system because I can. I change it because evidence shows the expected reward improvement is greater than the risk and cost."

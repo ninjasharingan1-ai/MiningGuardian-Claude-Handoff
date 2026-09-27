@@ -1,0 +1,13 @@
+cd C:\MiningGuardian
+
+.\.venv\Scripts\Activate.ps1
+
+python --version
+
+python -m pytest -q
+
+python -m ruff check src tests
+
+python -m mypy src
+
+python -m compileall -q src tests

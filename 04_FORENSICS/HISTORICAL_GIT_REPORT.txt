@@ -1,0 +1,407 @@
+﻿ROOT=C:\MiningGuardian
+
+=== TOPLEVEL ===
+C:/MiningGuardian
+
+=== BRANCH ===
+master
+
+=== HEAD ===
+10006aad445ba0e4329fe108fcea6ac7b39f697a
+
+=== STATUS PORCELAIN V2 ===
+# branch.oid 10006aad445ba0e4329fe108fcea6ac7b39f697a
+# branch.head master
+1 .D N... 100644 100644 000000 69001b1f1eddd098e8026de717bb371e9688fb8d 69001b1f1eddd098e8026de717bb371e9688fb8d MiningGuardian_M2_2_2_BASELINE_READY.zip
+1 .M N... 100644 100644 100644 c7264b60d50ef1d4410c08701815b7293d751937 c7264b60d50ef1d4410c08701815b7293d751937 src/mining_guardian/adapters/srbminer.py
+1 .M N... 100644 100644 100644 652f0fa1b7ecb843658fde38d3bdf762055470aa 652f0fa1b7ecb843658fde38d3bdf762055470aa src/mining_guardian/cli/commands.py
+1 .M N... 100644 100644 100644 a9c5e83fb5be860c373108f34cc1b3b4a6900067 a9c5e83fb5be860c373108f34cc1b3b4a6900067 src/mining_guardian/collectors/miner.py
+1 .M N... 100644 100644 100644 639d4dfae752d7fceeba8afbef2a02047217e93f 639d4dfae752d7fceeba8afbef2a02047217e93f src/mining_guardian/config.py
+1 .M N... 100644 100644 100644 a303c96e183fc3566489d993485a1ae35af54f1f a303c96e183fc3566489d993485a1ae35af54f1f src/mining_guardian/storage/__init__.py
+1 .M N... 100644 100644 100644 86f75ca617bf08d6a8504f55c2109e1525bd0466 86f75ca617bf08d6a8504f55c2109e1525bd0466 src/mining_guardian/storage/schema.py
+1 .M N... 100644 100644 100644 1a4e4872d25a97713f67798220b99aa0a5652d04 1a4e4872d25a97713f67798220b99aa0a5652d04 tests/unit/test_decision_persistence_models.py
+? .agents/skills/m3-cognitive-systems-architect/SKILL.md
+? .agents/skills/m3-cognitive-systems-architect/agents/openai.yaml
+? .agents/skills/m3-experimental-verification-engineer/SKILL.md
+? .agents/skills/m3-experimental-verification-engineer/agents/openai.yaml
+? .agents/skills/m3-runtime-observability-engineer/SKILL.md
+? .agents/skills/m3-runtime-observability-engineer/agents/openai.yaml
+? .agents/skills/m3-safe-control-optimization-engineer/SKILL.md
+? .agents/skills/m3-safe-control-optimization-engineer/agents/openai.yaml
+? .agents/skills/m3-time-series-statistical-learning-engineer/SKILL.md
+? .agents/skills/m3-time-series-statistical-learning-engineer/agents/openai.yaml
+? Artifacts/M3.1/final/M3.1_FINAL_FREEZE.sha256
+? Artifacts/M3.1/final/M3.1_FINAL_FREEZE.zip
+? Future Experiments/M3 Experimental Hash-Space Intelligence  Cryptanalytic Research Track.txt
+? M2_FINAL_ACCEPTANCE.md
+? M2_FINAL_BASELINE.md
+? M3.1_FINAL_FREEZE.sha256
+? M3.1_FINAL_FREEZE.zip
+? M3_ENGINEERING_HANDOFF.md
+? MiningGuardian_M2_FINAL.zip
+? "Skill 1 \342\200\224 M3 Cognitive Systems Arch.txt"
+? docs/m3/M3.0_FINAL_ACCEPTANCE.md
+? docs/m3/M3.0_FINAL_BASELINE.md
+? docs/m3/M3.0_FINAL_FREEZE_MANIFEST.md
+? docs/m3/M3.0_FOUNDATION_MANIFEST.md
+? docs/m3/M3.0_FOUNDATION_MANIFEST_v0.4.1.md
+? docs/m3/M3.0_FREEZE_CLEANUP_v0.4.1.md
+? docs/m3/M3.1_FINAL_ACCEPTANCE.md
+? docs/m3/M3.1_FINAL_BASELINE.md
+? docs/m3/M3.1_FINAL_FREEZE_MANIFEST.md
+? docs/m3/M3.1_IMPLEMENTATION_HANDOFF.md
+? docs/m3/M3.1_IMPLEMENTATION_REPORT.md
+? docs/m3/M3.1_TIMESTAMP_CONTRACT_CORRECTION.md
+? docs/m3/M3.2_IMPLEMENTATION_HANDOFF.md
+? docs/m3/M3.2_S4A_NARROW_AUTHORITY_FREEZE.md
+? docs/m3/M3_AGENT_RULES.md
+? docs/m3/M3_ARCHITECTURE.md
+? docs/m3/M3_CONTROL_SAFETY.md
+? docs/m3/M3_DATA_CONTRACTS.md
+? docs/m3/M3_EVALUATION_PROTOCOL.md
+? docs/m3/M3_GLOSSARY.md
+? docs/m3/M3_RUNTIME_EVIDENCE.md
+? docs/m3/README.md
+? docs/m3/adrs/M3.2-ADR-001-field-assessment-and-partial-snapshot.md
+? docs/m3/adrs/M3.2-ADR-002-temporal-admission-continuity-and-conflict.md
+? docs/m3/adrs/M3.2-ADR-003-deterministic-state-artifacts-and-persistence-query.md
+? docs/m3/history/remediation/M3.0_Freeze_Cleanup_v0.4.1.md
+? docs/m3/history/remediation/M3.0_Remediation_v0.2.md
+? docs/m3/history/remediation/M3.0_Remediation_v0.3.md
+? docs/m3/history/remediation/M3.0_Remediation_v0.4.md
+? docs/m3/reviews/M3.0_ARCHITECTURE_REVIEW_2_READ_ONLY_v0.2.md
+? docs/m3/reviews/M3.0_ARCHITECTURE_REVIEW_3_READ_ONLY_FREEZE_AUDIT_v0.3.md
+? docs/m3/reviews/M3.0_ARCHITECTURE_REVIEW_4_Closure_Recheck_PASS_v0.4.1.md
+? docs/m3/reviews/M3.0_ARCHITECTURE_REVIEW_4_READ_ONLY_CONTRACT_FREEZE_AUDIT_v0.4.md
+? docs/m3/reviews/M3.0_ARCHITECTURE_REVIEW_READ_ONLY_v0.1.md
+? docs/m3/reviews/M3.1_INDEPENDENT_IMPLEMENTATION_REVIEW.md
+? docs/m3/reviews/M3.1_REMEDIATION_CLOSURE_RECHECK.md
+? docs/m3/reviews/M3.1_REMEDIATION_REPORT.md
+? docs/m3/reviews/M3.2_READ_ONLY_PREFLIGHT_REPORT.md
+? docs/m3/reviews/M3.2_READ_ONLY_PREFLIGHT_REPORT_EXPORT.md
+? docs/m3/reviews/M3.2_S1_FINAL_CLOSURE.md
+? docs/m3/reviews/M3.2_S1_IMPLEMENTATION_REPORT.md
+? docs/m3/reviews/M3.2_S2_FINAL_CLOSURE.md
+? docs/m3/reviews/M3.2_S2_IMPLEMENTATION_REPORT.md
+? docs/m3/reviews/M3.2_S3_FINAL_CLOSURE.md
+? docs/m3/reviews/M3.2_S3_IMPLEMENTATION_REPORT.md
+? docs/m3/reviews/M3.2_SEMANTIC_CONTRACT_RESOLUTION_REPORT.md
+? docs/m3/reviews/M3.2_SEMANTIC_CONTRACT_RESOLUTION_REPORT_EXPORT.md
+? docs/m3/reviews/README.md
+? src/mining_guardian/observability/__init__.py
+? src/mining_guardian/observability/compatibility.py
+? src/mining_guardian/observability/continuity.py
+? src/mining_guardian/observability/miner.py
+? src/mining_guardian/observability/models.py
+? src/mining_guardian/observability/nvml.py
+? src/mining_guardian/observability/observer.py
+? src/mining_guardian/observability/payloads.py
+? src/mining_guardian/observability/pool.py
+? src/mining_guardian/observability/temporal.py
+? src/mining_guardian/observability/values.py
+? src/mining_guardian/state/__init__.py
+? src/mining_guardian/state/admission.py
+? src/mining_guardian/state/conflicts.py
+? src/mining_guardian/state/continuity.py
+? src/mining_guardian/state/contracts.py
+? src/mining_guardian/state/evidence_query.py
+? src/mining_guardian/state/methods.py
+? src/mining_guardian/state/subjects.py
+? src/mining_guardian/storage/decision_repository.py
+? src/mining_guardian/storage/runtime_repository.py
+? tests/integration/test_evidence_query.py
+? tests/integration/test_runtime_observer.py
+? tests/integration/test_runtime_persistence.py
+? tests/replay/test_runtime_closure.py
+? tests/unit/test_decision_persistence_repository.py
+? tests/unit/test_runtime_continuity.py
+? tests/unit/test_runtime_miner.py
+? tests/unit/test_runtime_nvml.py
+? tests/unit/test_runtime_observation.py
+? tests/unit/test_runtime_pool.py
+? tests/unit/test_runtime_temporal.py
+? tests/unit/test_state_admission.py
+? tests/unit/test_state_conflicts.py
+? tests/unit/test_state_continuity.py
+? tests/unit/test_state_contracts.py
+? tests/unit/test_state_methods.py
+? tests/unit/test_state_subjects.py
+? "\331\205\331\206 \330\257\331\210\331\206 \330\271\331\206\331\210\330\247\331\206.txt"
+
+=== WORKTREES ===
+worktree C:/MiningGuardian
+HEAD 10006aad445ba0e4329fe108fcea6ac7b39f697a
+branch refs/heads/master
+
+worktree C:/MiningGuardian.worktrees/hello-world
+HEAD 10006aad445ba0e4329fe108fcea6ac7b39f697a
+branch refs/heads/agents/hello-world
+
+worktree C:/Users/LH/.codex/worktrees/fd0b/MiningGuardian
+HEAD 10006aad445ba0e4329fe108fcea6ac7b39f697a
+detached
+
+
+=== TAGS ===
+m2.2.2-phase12.1.2
+m3.2-s4a-authority-recovered
+
+=== FULL LOG ===
+* 47dc0958af56529929fb6b5f34930376db53dfc0 | 2026-09-24 14:46:50 +0300 | tag: m3.2-s4a-authority-recovered, recovery/m3.2-s4a-authority | Recovered accepted MiningGuardian baseline through M3.2 S4-A authority freeze
+*-.   89b38cefa64ac20e3b14c50a34b2b1a81c2b4445 | 2026-09-23 16:30:11 +0300 |  | cline checkpoint session=1790170208728_l9t6h run=1
+|\ \  
+| | * 942ef4f6147817d186483b8fe27ec371b74ac918 | 2026-09-23 16:30:10 +0300 |  | untracked files on cline checkpoint
+| * 4d13ac28768b859ed8977a56905c034841a942e4 | 2026-09-23 16:30:10 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   a33bb1f6834a249b50355beb0a0f9a737a5027ab | 2026-09-23 16:29:54 +0300 |  | cline checkpoint session=1790168050925_xsgos run=4
+|/|\  
+| | * ecf809207a98404ab5e33e439d3a1e1934b29009 | 2026-09-23 16:29:54 +0300 |  | untracked files on cline checkpoint
+| * ce2923cae1149823d5c630df334d00eada19e968 | 2026-09-23 16:29:54 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   1caebb75b07e65b6dbd06ecab829546c0c7a3689 | 2026-09-23 16:19:45 +0300 |  | cline checkpoint session=1790168050925_xsgos run=2
+|/|\  
+| | * 65a4c02928c1ca134a353537ce3cc285e8dee795 | 2026-09-23 16:19:45 +0300 |  | untracked files on cline checkpoint
+| * baee4af60dcb1bcaa69241154c4f86b0d76181c3 | 2026-09-23 16:19:45 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   a4c04b45fec248f102a65581c54ec49c244f4bfb | 2026-09-23 15:54:13 +0300 |  | cline checkpoint session=1790168050925_xsgos run=1
+|/|\  
+| | * 10a03ad799c3c371da768b9534e1dceae86bdcd7 | 2026-09-23 15:54:12 +0300 |  | untracked files on cline checkpoint
+| * 1863f37dc3422e13cba038dac5b55a37319d49f1 | 2026-09-23 15:54:12 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   4804355feab33ca7eb657fb7c39644efc88d9399 | 2026-09-23 15:45:13 +0300 |  | cline checkpoint session=1790163038332_5sf1k run=3
+|/|\  
+| | * d367f9502c2f6014f20d3bfd4fb65faf9ad7955b | 2026-09-23 15:45:13 +0300 |  | untracked files on cline checkpoint
+| * acfc4e476650c16743c478b07e3cc4bd82a1101e | 2026-09-23 15:45:13 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   43fbf355052fd035aac8e826e8343bfde124ea5f | 2026-09-23 15:25:31 +0300 |  | cline checkpoint session=1790163038332_5sf1k run=2
+|/|\  
+| | * d3834ee52abee08776328b4ae3fd20dafc0d283f | 2026-09-23 15:25:30 +0300 |  | untracked files on cline checkpoint
+| * 135ff8fd3f684c76a33572a675c175899ece542a | 2026-09-23 15:25:30 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   f2cba12629c5daec0cc1f8aa4a27f6d74dd8d877 | 2026-09-23 14:30:41 +0300 |  | cline checkpoint session=1790163038332_5sf1k run=1
+|/|\  
+| | * 442de9c87b97e8631238efab23ecd2a09a2d5ec8 | 2026-09-23 14:30:41 +0300 |  | untracked files on cline checkpoint
+| * 24141ef99d037961cd0a6d3822a30e1c9dca8697 | 2026-09-23 14:30:40 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   49710c2f76e82296b0e6bd6d48bc2ae750e5ae78 | 2026-09-23 04:47:55 +0300 |  | cline checkpoint session=1790125094979_0yw5e run=2
+|/|\  
+| | * 34aba2c433a6f0fc30c59968064617f0401da6c1 | 2026-09-23 04:47:54 +0300 |  | untracked files on cline checkpoint
+| * c69287dc99c99ca8b48fe9b9f3d22f9b20d1e21a | 2026-09-23 04:47:54 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   d021dc191a3732f6265f4b999bacefd45e6c92d2 | 2026-09-23 03:58:17 +0300 |  | cline checkpoint session=1790125094979_0yw5e run=1
+|/|\  
+| | * 43749b9b7595959b1eee1ac2900afa5e834be6cc | 2026-09-23 03:58:17 +0300 |  | untracked files on cline checkpoint
+| * e4ae3e3fc3351f149aac0ecb1728ece843a03a25 | 2026-09-23 03:58:16 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   071b2de26fd58d6805d8b3b9988ee3b4bd9cfcaf | 2026-09-23 03:41:53 +0300 |  | cline checkpoint session=1790124108559_j2ith run=1
+|/|\  
+| | * 74e0e97f41a509b97f46217b020f00d8a7d45ad7 | 2026-09-23 03:41:53 +0300 |  | untracked files on cline checkpoint
+| * 02bec1c00795d4dc7fbbbf1a5207d0095961c697 | 2026-09-23 03:41:52 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   00bf062fae0f182e783758b91525f6f3129442d8 | 2026-09-23 02:55:28 +0300 |  | cline checkpoint session=1790121324047_j625r run=1
+|/|\  
+| | * 9a19f2266ecf9e5033cee1d02102b68d71ba9104 | 2026-09-23 02:55:28 +0300 |  | untracked files on cline checkpoint
+| * 8b87315b5e8577cf39d1eb128458c79eecda1c75 | 2026-09-23 02:55:28 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   1e86d3efa63075348de1c337a91fda45cfa6c1df | 2026-09-23 02:36:05 +0300 |  | cline checkpoint session=1790120161795_cq0yf run=1
+|/|\  
+| | * d83ca2002e0bbec02f171d102a43a4b02e7c0bfa | 2026-09-23 02:36:04 +0300 |  | untracked files on cline checkpoint
+| * 4c0d2c9c741df5930709595650bfa3a7d13ebfec | 2026-09-23 02:36:04 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   b46260b7cc2fbe8c74a9c1df7dd048ccb3a6b418 | 2026-09-23 02:08:25 +0300 |  | cline checkpoint session=1790118503629_42uxt run=1
+|/|\  
+| | * 8f720072e359613f9a5999fccb906c6fd5fbabf6 | 2026-09-23 02:08:25 +0300 |  | untracked files on cline checkpoint
+| * 99dd6312b7592015509018bbcf6432ad52848ae7 | 2026-09-23 02:08:24 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   63dbb2cb6e363b919c45afd5f599cc20636e6110 | 2026-09-23 01:18:03 +0300 |  | cline checkpoint session=1790115479151_mkqq1 run=1
+|/|\  
+| | * 5aed0958291010b39d15cb4b441eb5a537379e39 | 2026-09-23 01:18:03 +0300 |  | untracked files on cline checkpoint
+| * 8097f02dadd5269f9ae621309ebb19e63b99cb83 | 2026-09-23 01:18:02 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   3bcbf3253c0d25966c8d3487df248ce566c77e29 | 2026-09-23 01:07:25 +0300 |  | cline checkpoint session=1790079875313_mdexn run=8
+|/|\  
+| | * 991040663ab02bf468dc8b3bdc619a216b35f83c | 2026-09-23 01:07:25 +0300 |  | untracked files on cline checkpoint
+| * 5ce0897e80438ed8491fa0852115a8504214c675 | 2026-09-23 01:07:25 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   ab8d1c80dc071ccd5faf2b6281c9d5897e0623cc | 2026-09-23 00:47:49 +0300 |  | cline checkpoint session=1790079875313_mdexn run=6
+|/|\  
+| | * 5eddde4d5c50f0c11c73364b5498293ab71952b2 | 2026-09-23 00:47:49 +0300 |  | untracked files on cline checkpoint
+| * 228d50659602d1fa833386b1de3bafd0412a57f5 | 2026-09-23 00:47:49 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   75300ca68389d81ccc869679679c23b0aab85e7f | 2026-09-23 00:38:49 +0300 |  | cline checkpoint session=1790079875313_mdexn run=5
+|/|\  
+| | * 4a31351794d9cdbf3d6d67b14dfafdf961928a09 | 2026-09-23 00:38:49 +0300 |  | untracked files on cline checkpoint
+| * 80629fdc80f67799ad2ee2235a17636624c88fec | 2026-09-23 00:38:48 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   6b5fc080dc396a7cbf1f6fe034bf514884a82d72 | 2026-09-23 00:05:50 +0300 |  | cline checkpoint session=1790079875313_mdexn run=4
+|/|\  
+| | * f09bbd8342d57c23bdfeff466963ec62a68f6c95 | 2026-09-23 00:05:50 +0300 |  | untracked files on cline checkpoint
+| * 942dc2eaa714fd7c628f73c168862f0ccb19cac6 | 2026-09-23 00:05:49 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   4c45f2102284bbe1a032d4aed288bba01c80881d | 2026-09-22 23:25:26 +0300 |  | cline checkpoint session=1790079875313_mdexn run=3
+|/|\  
+| | * 599efbb2b55684271b20208022801e5dd314a38a | 2026-09-22 23:25:25 +0300 |  | untracked files on cline checkpoint
+| * ccfe9586c84d838ad50a42d813b783808eb19542 | 2026-09-22 23:25:25 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   7da630a24be09a7da5a6eaf620563d2cff21e87c | 2026-09-22 22:38:22 +0300 |  | cline checkpoint session=1790079875313_mdexn run=2
+|/|\  
+| | * eeb4098225191db62b6534d0b81293a370a08467 | 2026-09-22 22:38:22 +0300 |  | untracked files on cline checkpoint
+| * 58d0b54d399c6ec0eacc188f46cdc590d3191f64 | 2026-09-22 22:38:21 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   afa8e7617c7e7fd4eb43301ee4220b5628fa568a | 2026-09-22 15:24:37 +0300 |  | cline checkpoint session=1790079875313_mdexn run=1
+|/|\  
+| | * 4ab82fe3cf4d2554ea18868ac45f09989d2cda61 | 2026-09-22 15:24:37 +0300 |  | untracked files on cline checkpoint
+| * b940ed9d03f163cc9d17bad8d49e233c476f5be6 | 2026-09-22 15:24:36 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   e02cbf8ef527aaeae5298e29a03ed2b403d6874b | 2026-09-22 14:18:40 +0300 |  | cline checkpoint session=1790075257741_02lva run=2
+|/|\  
+| | * 66c83dbd07c0aa39b4842e5db15ed5aca14deef3 | 2026-09-22 14:18:40 +0300 |  | untracked files on cline checkpoint
+| * ca02179f42e006220e68859f9f175484c45fa54c | 2026-09-22 14:18:40 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   120dc33ecccbf67ba7a978bfcfc388ebc0ffd3f9 | 2026-09-22 14:07:39 +0300 |  | cline checkpoint session=1790075257741_02lva run=1
+|/|\  
+| | * 65cadc9b616acd678b5ccdd006502f824f45cf19 | 2026-09-22 14:07:39 +0300 |  | untracked files on cline checkpoint
+| * a37f82586ab383ae1c4edfca0481c9267fd05339 | 2026-09-22 14:07:39 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   f0a3cc245b491faea20542c74712294741d263ff | 2026-09-22 13:40:13 +0300 |  | cline checkpoint session=1790069295372_0ml02 run=3
+|/|\  
+| | * c4b305e76d18c4d0ef2cf8b8049701c7a15e1b14 | 2026-09-22 13:40:12 +0300 |  | untracked files on cline checkpoint
+| * e1b017c188b1b0187a3e21005b227e5b9bd30152 | 2026-09-22 13:40:12 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   6103279d60f7f6353b0b66517e5e98a06565afb2 | 2026-09-22 12:59:01 +0300 |  | cline checkpoint session=1790069295372_0ml02 run=2
+|/|\  
+| | * 959741ba4151fe06d0e44302263f6cfd4b97ed60 | 2026-09-22 12:59:01 +0300 |  | untracked files on cline checkpoint
+| * 5de7609575f6e05de8f43b1c3f6ef43cb2a57486 | 2026-09-22 12:59:01 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+| *   080d111eeb31410435163d89d25827b97b1f84a0 | 2026-09-22 12:28:18 +0300 |  | cline checkpoint session=1790069295372_0ml02 run=1
+|/|\  
+| | * 68de6dffa5833f8d08c631e2a0be2a5ffcf4d6e0 | 2026-09-22 12:28:17 +0300 |  | untracked files on cline checkpoint
+| * d163f7671d243873352c4771b6ac1bee6a34961b | 2026-09-22 12:28:17 +0300 |  | index on master: 10006aa M2.2.2 Phase 12.1.2 final persistence model baseline
+|/  
+* 10006aad445ba0e4329fe108fcea6ac7b39f697a | 2026-09-18 02:57:39 +0300 | HEAD -> master, tag: m2.2.2-phase12.1.2, agents/hello-world | M2.2.2 Phase 12.1.2 final persistence model baseline
+* c55d79598da4a1a46342b73b7f31717557483a45 | 2026-09-18 14:02:34 +0300 |  | Agent host session 11808a20-5d3d-4471-a84c-7d2fa4daccf0 - baseline checkpoint
+
+=== TRACKED FILES ===
+.env.example
+.gitignore
+.vscode/extensions.json
+ADR-0006_MiningGuardian_Decision_Engine_Implementation_Specification_FULL_v1.0.md
+AGENTS.md
+MiningGuardian/.vscode/extensions.json
+MiningGuardian/MiningGuardian/.vscode/extensions.json
+MiningGuardian/MiningGuardian/docs/adr/0001-m2-1-shadow-agent-foundation.md
+MiningGuardian/MiningGuardian/docs/adr/0002-m2-1-1-temporal-semantics.md
+MiningGuardian/MiningGuardian/docs/adr/0005-m2-2-1-cognitive-evidence-foundation-implementation.md
+MiningGuardian/MiningGuardian/docs/adr/MiningGuardian_M2_2_Architecture_Documents.txt
+MiningGuardian/docs/adr/0001-m2-1-shadow-agent-foundation.md
+MiningGuardian/docs/adr/0002-m2-1-1-temporal-semantics.md
+MiningGuardian/docs/adr/0005-m2-2-1-cognitive-evidence-foundation-implementation.md
+MiningGuardian/docs/adr/MiningGuardian_M2_2_Architecture_Documents.txt
+MiningGuardian_M2_2_2_BASELINE_READY.zip
+README.md
+SPEC.md
+SPECS.md
+config.example.yaml
+dir run.txt
+docs/adr/0001-m2-1-shadow-agent-foundation.md
+docs/adr/0002-m2-1-1-temporal-semantics.md
+docs/adr/0005-m2-2-1-cognitive-evidence-foundation-implementation.md
+docs/adr/ADR-0006 v0.2 .txt
+docs/adr/ADR-0006 v0.3.txt
+docs/adr/ADR-0006 v0.4.txt
+docs/adr/ADR-0006 v0.5.txt
+docs/adr/ADR-0006 v0.6.txt
+docs/adr/ADR-0006 v0.7.txt
+docs/adr/ADR-0006.txt
+docs/adr/MiningGuardian_M2_2_Architecture_Documents.txt
+project_tree.txt
+pyproject.toml
+src/mining_guardian/__init__.py
+src/mining_guardian/adapters/__init__.py
+src/mining_guardian/adapters/nvml.py
+src/mining_guardian/adapters/srbminer.py
+src/mining_guardian/agent/__init__.py
+src/mining_guardian/agent/cognition/claims.py
+src/mining_guardian/agent/cognition/enums.py
+src/mining_guardian/agent/cognition/evidence.py
+src/mining_guardian/agent/cognition/hypotheses.py
+src/mining_guardian/agent/cognition/reasoning.py
+src/mining_guardian/agent/cognition/validation.py
+src/mining_guardian/agent/context.py
+src/mining_guardian/agent/decision/__init__.py
+src/mining_guardian/agent/decision/candidates.py
+src/mining_guardian/agent/decision/confidence.py
+src/mining_guardian/agent/decision/context.py
+src/mining_guardian/agent/decision/engine.py
+src/mining_guardian/agent/decision/explanation.py
+src/mining_guardian/agent/decision/lifecycle.py
+src/mining_guardian/agent/decision/models.py
+src/mining_guardian/agent/decision/policies.py
+src/mining_guardian/agent/decision/predictors.py
+src/mining_guardian/agent/decision/ranking.py
+src/mining_guardian/agent/decision/scoring.py
+src/mining_guardian/agent/gateway.py
+src/mining_guardian/agent/live.py
+src/mining_guardian/agent/models.py
+src/mining_guardian/agent/records/decision_record.py
+src/mining_guardian/agent/records/experiment_record.py
+src/mining_guardian/agent/records/failure_record.py
+src/mining_guardian/agent/shadow.py
+src/mining_guardian/agent/temporal.py
+src/mining_guardian/cli/__init__.py
+src/mining_guardian/cli/commands.py
+src/mining_guardian/cli/main.py
+src/mining_guardian/collectors/__init__.py
+src/mining_guardian/collectors/hardware.py
+src/mining_guardian/collectors/miner.py
+src/mining_guardian/config.py
+src/mining_guardian/core/__init__.py
+src/mining_guardian/core/algorithm_registry.py
+src/mining_guardian/core/session_guardian.py
+src/mining_guardian/enums.py
+src/mining_guardian/formatting.py
+src/mining_guardian/logging.py
+src/mining_guardian/models.py
+src/mining_guardian/optimization/__init__.py
+src/mining_guardian/profitability/__init__.py
+src/mining_guardian/storage/__init__.py
+src/mining_guardian/storage/agent_repository.py
+src/mining_guardian/storage/database.py
+src/mining_guardian/storage/repository.py
+src/mining_guardian/storage/schema.py
+test_results.txt
+tests/__init__.py
+tests/conftest.py
+tests/fixtures/__init__.py
+tests/fixtures/fakes.py
+tests/fixtures/srbminer_3_6_4.json
+tests/integration/__init__.py
+tests/integration/test_agent_cli.py
+tests/integration/test_agent_persistence.py
+tests/integration/test_persistence.py
+tests/replay/__init__.py
+tests/unit/__init__.py
+tests/unit/test_adapters.py
+tests/unit/test_agent_context.py
+tests/unit/test_agent_freshness.py
+tests/unit/test_agent_live.py
+tests/unit/test_agent_models.py
+tests/unit/test_algorithm_registry.py
+tests/unit/test_cognitive_evidence_foundation.py
+tests/unit/test_decision_candidates.py
+tests/unit/test_decision_confidence.py
+tests/unit/test_decision_context.py
+tests/unit/test_decision_engine.py
+tests/unit/test_decision_explanation.py
+tests/unit/test_decision_lifecycle.py
+tests/unit/test_decision_models.py
+tests/unit/test_decision_persistence_models.py
+tests/unit/test_decision_policies.py
+tests/unit/test_decision_predictors.py
+tests/unit/test_decision_ranking.py
+tests/unit/test_decision_scoring.py
+tests/unit/test_formatting_and_nvml.py
+tests/unit/test_models.py
+tests/unit/test_safety_and_cli.py
+tests/unit/test_shadow_agent.py
+tests/unit/test_srbminer.py
